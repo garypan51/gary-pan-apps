@@ -1,7 +1,7 @@
 import React from 'react';
 import {Provider} from "react-redux";
-import store, {history} from "../../redux/store"
-import {ConnectedRouter} from "connected-react-router"
+import store from "../../redux/store"
+import Home from "../home"
 
 interface IProps {
     routes: any
@@ -11,9 +11,7 @@ const App = (props: IProps) => {
 
   return (
       <Provider store={store}>
-          <ConnectedRouter history={history}>
-              {props.routes}
-          </ConnectedRouter>
+          <Home/>
       </Provider>
   );
 }
