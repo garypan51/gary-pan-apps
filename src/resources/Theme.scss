@@ -1,0 +1,25 @@
+$themes: (
+  light: (
+      primary-color: #FFFFFF,
+      secondary-color: #FFFFFF,
+      text-color: #1F1F1F,
+  ),
+  dark: (
+      primary-color: #111111,
+      secondary-color: #1E1E1E,
+      text-color: #E1E1E1,
+  ),
+);
+
+@mixin theme() {
+  @each $theme, $map in $themes {
+    $theme-map: map-get($themes, $theme) !global;
+    .theme-#{$theme} & {
+      @content;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

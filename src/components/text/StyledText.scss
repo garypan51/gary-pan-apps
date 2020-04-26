@@ -1,4 +1,9 @@
+@import "../../resources/Theme.scss";
+
 @mixin text {
+  @include theme() {
+    color: themed("text-color");
+  }
   font-family: Open-Sans, sans-serif;
 }
 

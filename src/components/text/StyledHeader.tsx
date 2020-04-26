@@ -7,7 +7,7 @@ interface IProps extends TextProps{
 }
 
 export const StyledHeader = (props: IProps) => {
-    const style = props.type == "normal"? "styled-header" : "styled-large-header"
+    const style = props.type === "normal"? "styled-header" : "styled-large-header"
     return (
         <h1 className={style}>{props.children}</h1>
     )
