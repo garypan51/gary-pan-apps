@@ -1,0 +1,23 @@
+@import "../../resources/Theme.scss";
+
+@mixin text {
+  @include theme() {
+    color: themed("text-color");
+  }
+  font-family: Open-Sans, sans-serif;
+}
+
+.styled-large-header {
+  @include text;
+  font-size: 72px;
+}
+
+.styled-header {
+  @include text;
+  font-size: 30px;
+}
+
+.styled-paragraph {
+  @include text;
+  font-size: 16px;
+}
