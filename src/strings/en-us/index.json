@@ -2,7 +2,8 @@
   "en": {
     "translation": {
       "app": {
-        "name": "Gary Pan Apps"
+        "name": "Gary Pan Apps",
+        "shortName": "GPA"
       },
       "buttons": {
 
@@ -11,7 +12,7 @@
 
       },
       "home" : {
-        "title": "About Me"
+        "title": "Home"
       },
       "projects": {
         "title": "Projects"

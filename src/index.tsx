@@ -1,10 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './containers/app/App';
-import * as serviceWorker from './serviceWorker';
-import "bootstrap/dist/css/bootstrap.min.css";
-import {createRoutes} from "./routes";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import {App} from './containers/app/App'
+import * as serviceWorker from './serviceWorker'
+import {createRoutes} from "./routes"
 
 const render = () => {
     const routes = createRoutes()

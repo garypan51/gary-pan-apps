@@ -1,11 +1,16 @@
-import React from "react";
-import Grid, {GridProps} from "@material-ui/core/Grid";
+import styled from "styled-components"
+import {Colors} from "../../resources/Colors"
 
-export const Row = (props: GridProps) => {
-    return (
-        <Grid
-            className={"row-background"}
-            direction={"row"}
-            {...props} />
-    )
+interface IProps {
+    width?: string
+    height?: string
+    backgroundColor?: string
 }
+
+export const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: ${(props: IProps) => props.width ? props.width : "auto"};
+    height: ${(props: IProps) => props.height ? props.height : "auto"};
+    background-color: ${(props: IProps) => props.backgroundColor || Colors.dark.primaryColor};
+`

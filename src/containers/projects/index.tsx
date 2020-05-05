@@ -1,16 +1,12 @@
-import React from 'react';
-import './Projects.scss';
-import {Column} from "../../components/flexbox/Column";
-import {StyledHeader} from "../../components/text/StyledHeader";
-import {t} from "../../strings/i18n";
+import React from 'react'
+import {Column} from "../../components/flexbox/Column"
+import {Header} from "../../components/text/Header"
+import {t} from "../../strings/i18n"
 
-function App() {
-
+export const Projects = () => {
     return (
         <Column>
-            <StyledHeader type={"large"}>Projects</StyledHeader>
+            <Header type={"large"}>Projects</Header>
         </Column>
-    );
+    )
 }
-
-export default App;
