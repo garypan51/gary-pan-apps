@@ -17,11 +17,7 @@ const RootColumn = styled(Column)`
 export const Home = () => {
     return (
         <RootColumn>
-            <Header type={"large"}>{t("app.shortName")}</Header>
-            <Row id={"paper-row-container"}>
-                <Header>I like to create apps</Header>
-                <Paragraph>Hello</Paragraph>
-            </Row>
+            <Header type={"large"}>Coming Soon</Header>
         </RootColumn>
     )
 }

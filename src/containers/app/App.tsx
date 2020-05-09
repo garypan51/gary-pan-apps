@@ -1,33 +1,27 @@
-import React, {ChangeEvent, useState} from 'react';
-import {Provider} from "react-redux";
-import store from "../../redux/store"
+import React from 'react';
+import {useSelector} from "react-redux";
+import {StoreState} from "../../redux/store"
 import {BrowserRouter} from "react-router-dom";
 import {GPAAppBar} from "./GPAAppBar";
 import {ThemeProvider} from "styled-components";
-import {DarkTheme} from "../../resources/Theme";
+import {DarkTheme, LightTheme} from "../../resources/Theme";
 import {Column} from "../../components/flexbox/Column";
 
 interface IProps {
-    routes: any
+    routes?: any
 }
 
 export const App = (props: IProps) => {
-    const [selectedTabIndex, setSelectedTabIndex] = useState(0)
-
-    const onTabSelected = (event: ChangeEvent<{}>, selectedTabIndex: number) => {
-        setSelectedTabIndex(selectedTabIndex)
-    }
+    const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
 
     return (
-        <Provider store={store}>
-            <ThemeProvider theme={DarkTheme}>
-                <Column width={"100%"} height={"100%"}>
-                    <BrowserRouter>
-                        <GPAAppBar selectedTabIndex={selectedTabIndex} onTabSelected={onTabSelected}/>
-                        {props.routes}
-                    </BrowserRouter>
-                </Column>
-            </ThemeProvider>
-        </Provider>
-    );
+        <ThemeProvider theme={darkModeEnabled ? DarkTheme : LightTheme}>
+            <Column width={"100%"} height={"100%"}>
+                <BrowserRouter>
+                    <GPAAppBar/>
+                    {props.routes}
+                </BrowserRouter>
+            </Column>
+        </ThemeProvider>
+    )
 }

@@ -12,7 +12,9 @@
 
       },
       "home" : {
-        "title": "Home"
+        "title": "Home",
+        "sourceCodeTitle": "Psst, hey wanna so the code to this app?",
+        "sourceCodeDescription": "Click Here"
       },
       "projects": {
         "title": "Projects"

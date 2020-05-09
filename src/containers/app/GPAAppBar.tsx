@@ -1,31 +1,64 @@
 import React from "react"
-import {AppBar} from "../../components/material/AppBar";
-import {Tabs} from "@material-ui/core";
-import Tab from "@material-ui/core/Tab";
-import {t} from "../../strings/i18n";
+import {AppBar} from "../../components/presentational/AppBar"
+import {t} from "../../strings/i18n"
+import {Header} from "../../components/text/Header"
+import LightsOnIcon from "@material-ui/icons/EmojiObjects"
+import LightsOffIcon from "@material-ui/icons/EmojiObjectsOutlined"
+import styled from "styled-components";
+import {IconButton, Tooltip} from "@material-ui/core";
 import {Colors} from "../../resources/Colors";
+import linkedInImageSrc from "../../resources/images/linkedIn.png"
+import githubImageSrc from "../../resources/images/github-dark.png"
+import githubImageSrcLight from "../../resources/images/github-light.png"
+import {Row} from "../../components/flexbox/Row";
+import {Links} from "../../resources/Links";
+import {useDispatch, useSelector} from "react-redux";
+import {StoreState} from "../../redux/store";
+import {setDarkMode} from "../../redux/actions/AppActions";
+import {Avatar} from "../../components/presentational/Avatar";
 
-interface IProps {
-    selectedTabIndex: number
-    onTabSelected?: any
+interface AppBarProps {
+
 }
 
-export const GPAAppBar = (props: IProps) => {
+const StyledIconButton = styled(IconButton)`
+    &.iconButton {
+     :hover {
+          background-color: ${props => props.theme.rippleColor};
+        }
+    }
+`
+
+const BaseGPAAppBar = (props: AppBarProps) => {
+    const dispatch = useDispatch()
+    const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
+
+    const lightIcon = darkModeEnabled ? <LightsOffIcon style={{fill: Colors.dark.textColor}}/> : <LightsOnIcon style={{fill: Colors.light.textColor}}/>
+    const ghImageSrc = darkModeEnabled ? githubImageSrcLight : githubImageSrc
+
+    const toggleDarkMode = () => {
+        dispatch(setDarkMode(!darkModeEnabled))
+    }
+
     return (
         <AppBar>
-            <Tabs
-                className={"tabs"}
-                value={props.selectedTabIndex}
-                onChange={props.onTabSelected}
-                TabIndicatorProps={{
-                    style: {
-                        backgroundColor: Colors.dark.textColor
-                    }
-                }}>
-                <Tab className={"tab"} label={t("home.title")}/>
-                <Tab className={"tab"} label={t("projects.title")}/>
-                <Tab className={"tab"} label={t("contact.title")}/>
-            </Tabs>
+            <Header>{t("app.name")}</Header>
+            <Row backgroundColor={Colors.clearColor}>
+                <Avatar width={"40px"} height={"36px"} imgSrc={linkedInImageSrc} url={Links.linkedIn}/>
+                <Avatar width={"36px"} height={"36px"} imgSrc={ghImageSrc} url={Links.linkedIn}/>
+                <Tooltip title="Lights">
+                    <StyledIconButton
+                        classes={{root: "iconButton"}}
+                        aria-label="Lights"
+                        onClick={() => toggleDarkMode()}>
+                        {lightIcon}
+                    </StyledIconButton>
+                </Tooltip>
+            </Row>
         </AppBar>
     )
 }
+
+export const GPAAppBar = styled(BaseGPAAppBar)`
+
+`
