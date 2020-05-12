@@ -1,20 +1,36 @@
 import React from 'react'
 import MaterialPaper, {PaperProps} from '@material-ui/core/Paper'
+import styled from "styled-components";
+import {Theme} from "../../resources/Theme";
 
 interface IProps extends PaperProps {
+    theme: Theme
+    backgroundColor?: string
+    width?: string
+    height?: string
 }
 
-export const Paper = (props: IProps) => {
+const StyledMaterialPaper = styled(MaterialPaper)`
+    &.paper {
+        background-color: ${(props: IProps) => props.backgroundColor ?? props.theme.primaryColorDark};
+        width: ${(props: IProps) => props.width ?? "auto"};
+        height: ${(props: IProps) => props.height ?? "auto"};
+    };
+`
 
+export const BasePaper = (props: IProps) => {
     return (
-        <MaterialPaper
-            id={"material-paper"}
+        <StyledMaterialPaper
+            classes={{root: "paper"}}
             variant={"elevation"}
             {...props}>
-        </MaterialPaper>
+        </StyledMaterialPaper>
     )
 }
 
-Paper.defaultProps = {
+BasePaper.defaultProps = {
     elevation: 0
 }
+
+export const Paper = styled(BasePaper)`
+`

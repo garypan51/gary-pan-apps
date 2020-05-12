@@ -2,10 +2,12 @@ import {APP} from "../../constants/ReduxKeys";
 
 export interface AppState {
     darkModeEnabled: boolean
+    showSourceCodeLink: boolean
 }
 
 const initialState = {
-    darkModeEnabled: true
+    darkModeEnabled: true,
+    showSourceCodeLink: false
 }
 
 export function appReducer(state = initialState, action: any) {
@@ -14,6 +16,11 @@ export function appReducer(state = initialState, action: any) {
             return {
                 ...state,
                 darkModeEnabled: action.enabled
+            }
+        case APP.ACTION_SET_SHOW_SOURCE_CODE_LINK:
+            return {
+                ...state,
+                showSourceCodeLink: action.show
             }
         default:
             return state

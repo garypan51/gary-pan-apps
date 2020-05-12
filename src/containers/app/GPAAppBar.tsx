@@ -43,7 +43,7 @@ const BaseGPAAppBar = (props: AppBarProps) => {
     return (
         <AppBar>
             <Header>{t("app.name")}</Header>
-            <Row backgroundColor={Colors.clearColor}>
+            <Row backgroundColor={Colors.clearColor} alignItems={"center"}>
                 <Avatar width={"40px"} height={"36px"} imgSrc={linkedInImageSrc} url={Links.linkedIn}/>
                 <Avatar width={"36px"} height={"36px"} imgSrc={ghImageSrc} url={Links.linkedIn}/>
                 <Tooltip title="Lights">

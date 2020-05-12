@@ -4,3 +4,8 @@ export const setDarkMode = (enabled: boolean) => ({
     type: APP.ACTION_SET_DARK_MODE,
     enabled
 })
+
+export const setShowSourceCodeLink = (show: boolean) => ({
+    type: APP.ACTION_SET_SHOW_SOURCE_CODE_LINK,
+    show
+})

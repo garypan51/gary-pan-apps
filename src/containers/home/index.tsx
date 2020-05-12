@@ -4,20 +4,20 @@ import {Header} from "../../components/text/Header";
 import styled from "styled-components";
 import {Machine} from "xstate";
 import {useMachine} from "@xstate/react/lib";
-import {t} from "../../strings/i18n";
 
 const RootColumn = styled(Column)`
     margin: 16px
 `
+
 const HOME_MACHINE_KEYS = {
     STATES: {
         SPLASH_LOADING: "splashLoading",
         IDLE: "idle",
-        PROJECT_LOADING: "projectLoading",
+        PROJECTS_LOADING: "projectsLoading",
     },
     ACTIONS: {
         DISMISS_SPLASH: "DISMISS_SPLASH",
-        LOAD_PROJECT: "LOAD_PROJECT",
+        LOAD_PROJECTS: "LOAD_PROJECTS",
     }
 }
 
@@ -29,9 +29,9 @@ export const homeMachine = Machine({
             on: { DISMISS_SPLASH: HOME_MACHINE_KEYS.STATES.IDLE }
         },
         idle: {
-            on: { LOAD_PROJECT: HOME_MACHINE_KEYS.STATES.PROJECT_LOADING }
+            on: { LOAD_PROJECT: HOME_MACHINE_KEYS.STATES.PROJECTS_LOADING }
         },
-        projectLoading: {
+        projectsLoading: {
 
         }
     }

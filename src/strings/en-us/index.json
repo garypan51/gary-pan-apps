@@ -3,7 +3,9 @@
     "translation": {
       "app": {
         "name": "Gary Pan Apps",
-        "shortName": "GPA"
+        "shortName": "GPA",
+        "sourceCodeTitle": "Psst, wanna see the source code? Click Here",
+        "sourceCodeConfirm": "Of Course"
       },
       "buttons": {
 
@@ -12,9 +14,7 @@
 
       },
       "home" : {
-        "title": "Home",
-        "sourceCodeTitle": "Psst, hey wanna so the code to this app?",
-        "sourceCodeDescription": "Click Here"
+        "title": "Home"
       },
       "projects": {
         "title": "Projects"
