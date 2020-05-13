@@ -32,9 +32,7 @@ export const App = (props: IProps) => {
                     <GPAAppBar/>
                     {props.routes}
                 </BrowserRouter>
-                {showSourceCodeLink &&
-                    <SourceCodeLink onDismiss={() => {dispatch(setShowSourceCodeLink(false))}}/>
-                }
+                <SourceCodeLink show={showSourceCodeLink} onDismiss={() => {dispatch(setShowSourceCodeLink(false))}}/>
             </Column>
         </ThemeProvider>
     )
