@@ -12,6 +12,7 @@ interface IProps {
 }
 
 export const Column = styled.div`
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: ${(props: IProps) => props.justifyContent ?? "flex-start"};

@@ -17,9 +17,13 @@ import {StoreState} from "../../redux/store";
 import {setDarkMode} from "../../redux/actions/AppActions";
 import {Avatar} from "../../components/presentational/Avatar";
 
-interface AppBarProps {
-
+interface IProps {
 }
+
+const StyledAppBar = styled(AppBar)`
+    width: 100%;
+    padding: 16px 16px;
+`
 
 const StyledIconButton = styled(IconButton)`
     &.iconButton {
@@ -29,7 +33,7 @@ const StyledIconButton = styled(IconButton)`
     }
 `
 
-const BaseGPAAppBar = (props: AppBarProps) => {
+export const GPAAppBar = (props: IProps) => {
     const dispatch = useDispatch()
     const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
 
@@ -41,7 +45,7 @@ const BaseGPAAppBar = (props: AppBarProps) => {
     }
 
     return (
-        <AppBar>
+        <StyledAppBar className={"gpa-appbar"}>
             <Header>{t("app.name")}</Header>
             <Row backgroundColor={Colors.clearColor} alignItems={"center"}>
                 <Avatar width={"40px"} height={"36px"} imgSrc={linkedInImageSrc} url={Links.linkedIn}/>
@@ -55,10 +59,6 @@ const BaseGPAAppBar = (props: AppBarProps) => {
                     </StyledIconButton>
                 </Tooltip>
             </Row>
-        </AppBar>
+        </StyledAppBar>
     )
 }
-
-export const GPAAppBar = styled(BaseGPAAppBar)`
-
-`

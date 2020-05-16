@@ -1,43 +1,22 @@
-import React from 'react';
-import MaterialAppBar, {AppBarProps} from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import styled from "styled-components";
+import React, {ReactNode} from 'react';
 import {Theme} from "../../resources/Theme";
+import {Row} from '../flexbox/Row';
 
-interface BaseAppBarProps extends AppBarProps {
-
-}
-
-interface StyledMaterialAppBarProps {
+interface IProps {
     theme: Theme
     backgroundColor?: string
+    children?: ReactNode
+    className?: string
 }
 
-interface BaseAppBarProps {
-
-}
-
-const StyledMaterialAppBar = styled(MaterialAppBar)`
-    &.app-bar {
-        background-color: ${(props: StyledMaterialAppBarProps) => props.backgroundColor ?? props.theme.primaryColorDark};
-    }
-`
-
-const StyledToolbar = styled(Toolbar)`
-    &.toolbar {
-        justify-content: space-between
-    }
-`
-
-const BaseAppBar = (props: BaseAppBarProps) => {
+export const AppBar = (props: IProps) => {
     return (
-        <StyledMaterialAppBar classes={{root: "app-bar"}} position="static">
-            <StyledToolbar classes={{root: "toolbar"}}>
-                {props.children}
-            </StyledToolbar>
-        </StyledMaterialAppBar>
-    );
+        <Row
+            className={props.className}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            padding={"0 16px"}>
+            {props.children}
+        </Row>
+    )
 }
-
-export const AppBar = styled(BaseAppBar)`
-`
