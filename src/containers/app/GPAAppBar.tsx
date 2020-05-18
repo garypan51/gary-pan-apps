@@ -2,27 +2,32 @@ import React from "react"
 import {AppBar} from "../../components/presentational/AppBar"
 import {t} from "../../strings/i18n"
 import {Header} from "../../components/text/Header"
-import LightsOnIcon from "@material-ui/icons/EmojiObjects"
-import LightsOffIcon from "@material-ui/icons/EmojiObjectsOutlined"
+import MenuIcon from "@material-ui/icons/MenuRounded"
 import styled from "styled-components";
 import {IconButton, Tooltip} from "@material-ui/core";
 import {Colors} from "../../resources/Colors";
-import linkedInImageSrc from "../../resources/images/linkedIn.png"
-import githubImageSrc from "../../resources/images/github-dark.png"
-import githubImageSrcLight from "../../resources/images/github-light.png"
+import linkedInImgSrc from "../../resources/images/linkedIn.png"
+import githubImgSrc from "../../resources/images/github-dark.png"
+import githubImgSrcLight from "../../resources/images/github-light.png"
+import mediumImgSrc from "../../resources/images/medium-black.svg"
+import mediumImgSrcLight from "../../resources/images/medium-white.svg"
 import {Row} from "../../components/flexbox/Row";
 import {Links} from "../../resources/Links";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {StoreState} from "../../redux/store";
-import {setDarkMode} from "../../redux/actions/AppActions";
 import {Avatar} from "../../components/presentational/Avatar";
 
 interface IProps {
+    onMenuClick?: () => void
 }
 
 const StyledAppBar = styled(AppBar)`
     width: 100%;
     padding: 16px 16px;
+`
+
+const AppBarTitle = styled(Header)`
+    margin-left: 16px;
 `
 
 const StyledIconButton = styled(IconButton)`
@@ -34,30 +39,29 @@ const StyledIconButton = styled(IconButton)`
 `
 
 export const GPAAppBar = (props: IProps) => {
-    const dispatch = useDispatch()
     const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
 
-    const lightIcon = darkModeEnabled ? <LightsOffIcon style={{fill: Colors.dark.textColor}}/> : <LightsOnIcon style={{fill: Colors.light.textColor}}/>
-    const ghImageSrc = darkModeEnabled ? githubImageSrcLight : githubImageSrc
-
-    const toggleDarkMode = () => {
-        dispatch(setDarkMode(!darkModeEnabled))
-    }
+    const menuIcon = darkModeEnabled ? <MenuIcon style={{fill: Colors.dark.textColor}}/> : <MenuIcon style={{fill: Colors.light.textColor}}/>
+    const githubImageSrc = darkModeEnabled ? githubImgSrcLight : githubImgSrc
+    const mediumImageSrc = darkModeEnabled ? mediumImgSrcLight : mediumImgSrc
 
     return (
         <StyledAppBar className={"gpa-appbar"}>
-            <Header>{t("app.name")}</Header>
-            <Row backgroundColor={Colors.clearColor} alignItems={"center"}>
-                <Avatar width={"40px"} height={"36px"} imgSrc={linkedInImageSrc} url={Links.linkedIn}/>
-                <Avatar width={"36px"} height={"36px"} imgSrc={ghImageSrc} url={Links.linkedIn}/>
-                <Tooltip title="Lights">
-                    <StyledIconButton
-                        classes={{root: "iconButton"}}
-                        aria-label="Lights"
-                        onClick={() => toggleDarkMode()}>
-                        {lightIcon}
-                    </StyledIconButton>
-                </Tooltip>
+            <Row
+                transparent
+                alignItems={"center"}>
+                <StyledIconButton
+                    classes={{root: "iconButton"}}
+                    aria-label="Menu"
+                    onClick={props.onMenuClick}>
+                    {menuIcon}
+                </StyledIconButton>
+                <AppBarTitle>{t("app.name")}</AppBarTitle>
+            </Row>
+            <Row transparent alignItems={"center"}>
+                <Avatar width={"40px"} height={"36px"} imgSrc={linkedInImgSrc} href={Links.linkedIn}/>
+                <Avatar width={"36px"} height={"36px"} imgSrc={githubImageSrc} href={Links.linkedIn}/>
+                <Avatar width={"60px"} imgSrc={mediumImageSrc} href={Links.medium}/>
             </Row>
         </StyledAppBar>
     )

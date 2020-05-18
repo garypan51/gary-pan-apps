@@ -12,7 +12,7 @@ interface IProps extends PaperProps {
 
 const StyledMaterialPaper = styled(MaterialPaper)`
     &.paper {
-        background-color: ${(props: IProps) => props.backgroundColor ?? props.theme.primaryColorDark};
+        background-color: ${(props: IProps) => props.backgroundColor ?? props.theme.secondaryColor};
         width: ${(props: IProps) => props.width ?? "auto"};
         height: ${(props: IProps) => props.height ?? "auto"};
     };

@@ -3,7 +3,7 @@ import React from "react"
 import {useSpring, animated, config} from "react-spring";
 
 interface IProps {
-    url?: string
+    href?: string
     imgSrc?: string
     width: string
     height: string
@@ -19,7 +19,7 @@ const BaseAvatar = (props: IProps) => {
     }))
 
     return (
-        <a style={{marginRight: 32}} href={props.url} target="_blank" rel="noopener noreferrer">
+        <a style={{marginRight: 32}} href={props.href} target="_blank" rel="noopener noreferrer">
             <animated.img
                 style={{transform: avatarProps.scale.interpolate(scaleTransform)}}
                 width={props.width}

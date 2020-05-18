@@ -1,7 +1,11 @@
 export const Colors = {
     dark: {
         primaryColor: "#202124",
+        primaryColorGradStart: "rgba(32, 33, 36, 0.5)",
+        primaryColorGradEnd: "rgba(32, 33, 36, 0.1)",
         primaryColorDark: "#111111",
+        primaryColorDarkGradStart: "rgba(17, 17, 17, 0.3)",
+        primaryColorDarkGradEnd: "rgba(17, 17, 17, 0.1)",
         secondaryColor: "#2b2c30",
         textColor: "#d6d4d4",
         rippleColor: "rgba(255, 255, 255, 0.2)",

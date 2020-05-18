@@ -6,7 +6,6 @@ import styled, {ThemeContext} from "styled-components";
 import {Paper} from "../../components/presentational/Paper";
 import {Column} from "../../components/flexbox/Column";
 import {Row} from "../../components/flexbox/Row";
-import {Colors} from "../../resources/Colors";
 import {CSSTransition} from 'react-transition-group';
 
 interface IProps {
@@ -57,17 +56,17 @@ export const SourceCodeLink = (props: IProps) => {
                 onMouseEnter={() => setContentText(t("app.sourceCodeTitle"))}
                 onMouseLeave={() => setContentText(t("app.sourceCodeTitle"))}>
                 <Row
-                    backgroundColor={Colors.clearColor}
+                    transparent
                     alignItems={"flex-start"}>
                     <Column
-                        backgroundColor={Colors.clearColor}
+                        transparent
                         width={"200px"}>
                         <Link href={Links.sourceCode} target="_blank" rel="noopener noreferrer">
                             <Paragraph fontSize={"12px"}>{contentText}</Paragraph>
                         </Link>
                     </Column>
                     <Column
-                        backgroundColor={Colors.clearColor}
+                        transparent
                         padding={"10px 4px"}>
                         <button onClick={props.onDismiss}>Dismiss</button>
                     </Column>
