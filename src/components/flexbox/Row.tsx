@@ -4,6 +4,8 @@ import {Colors} from "../../resources/Colors";
 
 interface IProps {
     theme: Theme
+    overflow?: string
+    position?: string
     flex?: number | string
     width?: string
     height?: string
@@ -17,6 +19,8 @@ interface IProps {
 
 export const Row = styled.div`
     box-sizing: border-box;
+    overflow: ${(props: IProps) => props.overflow ?? "hidden"};
+    position: ${(props: IProps) => props.position ?? undefined};
     display: flex;
     flex: ${(props: IProps) => props.flex ?? undefined};
     flex-direction: row;

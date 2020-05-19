@@ -4,6 +4,7 @@ import {Home} from "../containers/home"
 import {About} from "../containers/about"
 import {Projects} from "../containers/projects"
 import {Contact} from "../containers/contact"
+import {NotFound} from "../containers/notFound/NotFound";
 
 export const createRoutes = () => {
     return (
@@ -12,6 +13,7 @@ export const createRoutes = () => {
             <Route path="/about" element={<About/>} />
             <Route path="/projects" element={<Projects/>} />
             <Route path="/contact" element={<Contact/>} />
+            <Route path="*" element={<NotFound/>} />
         </Routes>
     )
 }

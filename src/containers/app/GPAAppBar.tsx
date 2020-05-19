@@ -50,17 +50,19 @@ export const GPAAppBar = (props: IProps) => {
             <Row
                 transparent
                 alignItems={"center"}>
-                <StyledIconButton
-                    classes={{root: "iconButton"}}
-                    aria-label="Menu"
-                    onClick={props.onMenuClick}>
-                    {menuIcon}
-                </StyledIconButton>
+                <Tooltip title={"Menu"}>
+                    <StyledIconButton
+                        classes={{root: "iconButton"}}
+                        aria-label="Menu"
+                        onClick={props.onMenuClick}>
+                        {menuIcon}
+                    </StyledIconButton>
+                </Tooltip>
                 <AppBarTitle>{t("app.name")}</AppBarTitle>
             </Row>
-            <Row transparent alignItems={"center"}>
+            <Row transparent alignItems={"center"} padding={"8px 0 8px 8px"}>
                 <Avatar width={"40px"} height={"36px"} imgSrc={linkedInImgSrc} href={Links.linkedIn}/>
-                <Avatar width={"36px"} height={"36px"} imgSrc={githubImageSrc} href={Links.linkedIn}/>
+                <Avatar width={"36px"} height={"36px"} imgSrc={githubImageSrc} href={Links.github}/>
                 <Avatar width={"60px"} imgSrc={mediumImageSrc} href={Links.medium}/>
             </Row>
         </StyledAppBar>

@@ -5,6 +5,8 @@ import {Colors} from "../../resources/Colors";
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
     theme?: Theme
+    overflow?: string
+    position?: string
     flex?: number | string
     width?: string
     height?: string
@@ -18,6 +20,8 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const StyledColumn = styled.div`
     box-sizing: border-box;
+    overflow: ${(props: IProps) => props.overflow ?? "hidden"};
+    position: ${(props: IProps) => props.position ?? undefined};
     display: flex;
     flex: ${(props: IProps) => props.flex ?? undefined};
     flex-direction: column;

@@ -16,6 +16,9 @@
       "home" : {
         "title": "Home"
       },
+      "about" : {
+        "title": "About"
+      },
       "projects": {
         "title": "Projects"
       },
