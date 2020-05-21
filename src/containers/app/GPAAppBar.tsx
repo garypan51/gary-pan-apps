@@ -18,6 +18,7 @@ import {StoreState} from "../../redux/store";
 import {Avatar} from "../../components/presentational/Avatar";
 
 interface IProps {
+    title?: string
     onMenuClick?: () => void
 }
 
@@ -58,7 +59,7 @@ export const GPAAppBar = (props: IProps) => {
                         {menuIcon}
                     </StyledIconButton>
                 </Tooltip>
-                <AppBarTitle>{t("app.name")}</AppBarTitle>
+                <AppBarTitle>{props.title}</AppBarTitle>
             </Row>
             <Row transparent alignItems={"center"} padding={"8px 0 8px 8px"}>
                 <Avatar width={"40px"} height={"36px"} imgSrc={linkedInImgSrc} href={Links.linkedIn}/>
