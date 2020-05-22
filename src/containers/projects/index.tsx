@@ -1,12 +1,105 @@
-import React from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Column} from "../../components/flexbox/Column"
 import {Header} from "../../components/text/Header"
 import {t} from "../../strings/i18n"
+import {animated, config, useSpring} from "react-spring";
+import {FloatingActionButton} from "../../components/buttons/FloatingActionButton";
+import AppsIcon from '@material-ui/icons/Apps';
+import {PagePicker} from "./PagePicker";
+import styled, {ThemeContext} from "styled-components";
+import {Row} from "../../components/flexbox/Row";
+import {Colors} from "../../resources/Colors";
+import {useOnOutsideClick} from "../../hooks/UseOnOutsideClick";
+
+const GradientOverlay = styled(Row)`
+    position: absolute;
+    bottom: -24px;
+    pointer-events: none;
+    background-color: ${Colors.dark.primaryColorDarkGradStart}
+`
+
+const BottomPagePickerContainer = styled(Column)`
+    @media (max-width: 768px) {
+        display: none;
+    }
+`
 
 export const Projects = () => {
+    const theme = useContext(ThemeContext)
+    const [ref, onOutsideClick, resetOnOutsideClick] = useOnOutsideClick()
+    const [pagePickerOpen, setPagePickerOpen] = useState(false)
+
+    useEffect(() => {
+        const pagePickerButtonStartY = pagePickerOpen ? "50px" : "-70px"
+        const pagePickerButtonEndY = pagePickerOpen ? "-70px" : "50px"
+        const pagePickerStartY = pagePickerOpen ? "-224px" : "24px"
+        const pagePickerEndY = pagePickerOpen ? "24px" : "-224px"
+
+        setPagePickerButtonProps({
+            config: config.gentle,
+            from: {position: "absolute", left: "50%", bottom: pagePickerButtonStartY},
+            to: {position: "absolute", left: "50%", bottom: pagePickerButtonEndY},
+        })
+
+        setBottomPagePickerProps({
+            config: config.gentle,
+            from: {position: "absolute", bottom: pagePickerStartY},
+            to: {position: "absolute", bottom: pagePickerEndY}
+        })
+
+        let debounce: NodeJS.Timeout | undefined = undefined
+        resetOnOutsideClick()
+        debounce = global.setTimeout(() => {
+            if(onOutsideClick && pagePickerOpen) {
+                setPagePickerOpen(false)
+                resetOnOutsideClick()
+            }
+        }, 500)
+        return () => {
+            if (debounce) {
+                clearTimeout(debounce);
+            }
+        }
+    }, [onOutsideClick, pagePickerOpen])
+
+    useEffect(() => {
+        if(onOutsideClick && pagePickerOpen) {
+            setPagePickerOpen(false)
+        }
+    }, [onOutsideClick])
+
+    const [pagePickerButtonProps, setPagePickerButtonProps] = useSpring(() => ({
+        config: config.wobbly,
+        from: {position: "absolute", left: "50%", bottom: "-70px"},
+        to: {position: "absolute", left: "50%", bottom: "50px"},
+    }))
+    const [bottomPagePickerProps, setBottomPagePickerProps] = useSpring(() => ({
+        config: config.gentle,
+        from: {position: "absolute", bottom: "-224px"},
+        to: {position: "absolute", bottom: "-224px"}
+    }))
+
     return (
         <Column>
-            <Header type={"large"}>Projects</Header>
+            <Header margin={"0 16px"} type={"large"}>Projects</Header>
+            <BottomPagePickerContainer forwardRef={ref}>
+                <animated.div style={pagePickerButtonProps}>
+                    <FloatingActionButton
+                        theme={theme}
+                        onClick={() => setPagePickerOpen(prevState => !prevState)}>
+                        <AppsIcon/>
+                    </FloatingActionButton>
+                </animated.div>
+                <animated.div style={bottomPagePickerProps}>
+                    <Column transparent>
+                        <GradientOverlay
+                            transparent
+                            width={"100vw"}
+                            height={"250px"}/>
+                    </Column>
+                    <PagePicker onPageClick={() => setPagePickerOpen(false)}/>
+                </animated.div>
+            </BottomPagePickerContainer>
         </Column>
     )
 }

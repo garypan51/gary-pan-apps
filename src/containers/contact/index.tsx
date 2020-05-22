@@ -5,8 +5,8 @@ import {t} from "../../strings/i18n"
 
 export const Contact = () => {
     return (
-        <Column>
-            <Header type={"large"}>Contacts</Header>
+        <Column padding={"0 16px"}>
+            <Header type={"large"}>Contact Me</Header>
         </Column>
     );
 }

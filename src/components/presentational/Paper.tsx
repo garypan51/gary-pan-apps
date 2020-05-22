@@ -8,6 +8,7 @@ interface IProps extends PaperProps {
     backgroundColor?: string
     width?: string
     height?: string
+    cursor?: string
 }
 
 const StyledMaterialPaper = styled(MaterialPaper)`
@@ -15,6 +16,7 @@ const StyledMaterialPaper = styled(MaterialPaper)`
         background-color: ${(props: IProps) => props.backgroundColor ?? props.theme.secondaryColor};
         width: ${(props: IProps) => props.width ?? "auto"};
         height: ${(props: IProps) => props.height ?? "auto"};
+        cursor: ${(props: IProps) => props.cursor ?? undefined};
     };
 `
 

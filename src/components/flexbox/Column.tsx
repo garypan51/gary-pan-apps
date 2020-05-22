@@ -4,6 +4,7 @@ import {DarkTheme, Theme} from "../../resources/Theme";
 import {Colors} from "../../resources/Colors";
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
+    forwardRef?: any
     theme?: Theme
     overflow?: string
     position?: string
@@ -36,6 +37,6 @@ const StyledColumn = styled.div`
 
 export const Column = (props: IProps) => {
     return (
-        <StyledColumn {...props}/>
+        <StyledColumn ref={props.forwardRef} {...props}/>
     )
 }

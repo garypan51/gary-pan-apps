@@ -5,7 +5,7 @@ import {t} from "../../strings/i18n"
 
 export const About = () => {
     return (
-        <Column>
+        <Column padding={"0 16px"}>
             <Header type={"large"}>About</Header>
         </Column>
     );

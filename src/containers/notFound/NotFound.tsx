@@ -5,7 +5,7 @@ import {t} from "../../strings/i18n"
 
 export const NotFound = () => {
     return (
-        <Column>
+        <Column padding={"0 16px"}>
             <Header type={"large"}>404 Not Found :(</Header>
         </Column>
     )

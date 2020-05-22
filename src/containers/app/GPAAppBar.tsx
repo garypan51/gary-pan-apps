@@ -16,6 +16,7 @@ import {Links} from "../../resources/Links";
 import {useSelector} from "react-redux";
 import {StoreState} from "../../redux/store";
 import {Avatar} from "../../components/presentational/Avatar";
+import {useOnMobile} from "../../hooks/UseOnMobile";
 
 interface IProps {
     title?: string
@@ -24,7 +25,7 @@ interface IProps {
 
 const StyledAppBar = styled(AppBar)`
     width: 100%;
-    padding: 16px 16px;
+    padding: 12px 16px 12px 4px;
 `
 
 const AppBarTitle = styled(Header)`
@@ -41,6 +42,7 @@ const StyledIconButton = styled(IconButton)`
 
 export const GPAAppBar = (props: IProps) => {
     const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
+    const onMobile = useOnMobile()
 
     const menuIcon = darkModeEnabled ? <MenuIcon style={{fill: Colors.dark.textColor}}/> : <MenuIcon style={{fill: Colors.light.textColor}}/>
     const githubImageSrc = darkModeEnabled ? githubImgSrcLight : githubImgSrc
@@ -64,7 +66,9 @@ export const GPAAppBar = (props: IProps) => {
             <Row transparent alignItems={"center"} padding={"8px 0 8px 8px"}>
                 <Avatar width={"40px"} height={"36px"} imgSrc={linkedInImgSrc} href={Links.linkedIn}/>
                 <Avatar width={"36px"} height={"36px"} imgSrc={githubImageSrc} href={Links.github}/>
-                <Avatar width={"60px"} imgSrc={mediumImageSrc} href={Links.medium}/>
+                { !onMobile &&
+                    <Avatar width={"60px"} imgSrc={mediumImageSrc} href={Links.medium}/>
+                }
             </Row>
         </StyledAppBar>
     )

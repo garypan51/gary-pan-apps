@@ -14,7 +14,7 @@ export const Colors = {
     light: {
         primaryColor: "#e4e4e4",
         primaryColorDark: "#d4d2d2",
-        secondaryColor: "#2b2c30",
+        secondaryColor: "#ffffff",
         textColor: "#222222",
         accentColor: "#80CBC4",
         rippleColor: "rgba(0, 0, 0, 0.1)"

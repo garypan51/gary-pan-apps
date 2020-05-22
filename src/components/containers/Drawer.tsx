@@ -54,7 +54,7 @@ const StyledDrawerItem = styled(DrawerItem)`
     }
 `
 
-export const Drawer = (props: IProps) => {
+export const Drawer = ({theme, backgroundColor, width, height, onDismiss, ...rest }: IProps) => {
     const dispatch = useDispatch()
     const location = useLocation()
     const navigate = useNavigate()
@@ -67,11 +67,11 @@ export const Drawer = (props: IProps) => {
 
     const onDrawerItemClick = (path: string) => {
         navigate(path)
-        props.onDismiss?.()
+        onDismiss?.()
     }
 
     return (
-        <StyledMaterialDrawer classes={{root: "drawer", paper: "paper"}} {...props}>
+        <StyledMaterialDrawer classes={{root: "drawer", paper: "paper"}} {...rest}>
             <Column height={"100%"}>
                 <DrawerHeaderContainer width={"250px"} justifyContent={"space-between"} alignItems={"center"} padding={"0 16px"}>
                     <Paragraph>Quick Links</Paragraph>
@@ -87,6 +87,7 @@ export const Drawer = (props: IProps) => {
                 {
                     GPAPages.map((page, index) =>
                                 <StyledDrawerItem
+                                    key={index}
                                     onClick={() => onDrawerItemClick(page.path)}
                                     className={"drawer-item"}
                                     title={page.name}

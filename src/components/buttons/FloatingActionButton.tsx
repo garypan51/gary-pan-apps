@@ -14,11 +14,6 @@ interface IProps extends FabProps {
 
 const StyledFab = styled(Fab)`
     &.fab {
-        width: 40px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
     }
 `
 
