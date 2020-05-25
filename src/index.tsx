@@ -1,16 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './containers/app/App';
-import * as serviceWorker from './serviceWorker';
-import "bootstrap/dist/css/bootstrap.min.css";
-import {createRoutes} from "./routes";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import {App} from './containers/app/App'
+import * as serviceWorker from './serviceWorker'
+import {createRoutes} from "./routes"
+import {Provider} from "react-redux";
+import store from "./redux/store";
 
 const render = () => {
     const routes = createRoutes()
         ReactDOM.render(
             <React.StrictMode>
-                <App routes={routes} />
+                <Provider store={store}>
+                    <App routes={routes} />
+                </Provider>
             </React.StrictMode>,
             document.getElementById('root')
         )

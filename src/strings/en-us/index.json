@@ -2,7 +2,10 @@
   "en": {
     "translation": {
       "app": {
-        "name": "Gary Pan Apps"
+        "name": "Gary Pan Apps",
+        "shortName": "GPA",
+        "sourceCodeTitle": "Psst, wanna see the source code? Click Here",
+        "sourceCodeConfirm": "Of Course"
       },
       "buttons": {
 
@@ -11,13 +14,22 @@
 
       },
       "home" : {
-        "title": "About Me"
+        "title": "Home"
+      },
+      "about" : {
+        "title": "About"
+      },
+      "aboutThisWebsite" : {
+        "title": "About This Website"
       },
       "projects": {
         "title": "Projects"
       },
       "contact": {
         "title": "Contact Me"
+      },
+      "notFound": {
+        "title": "404 Not Found :("
       }
     }
   }
