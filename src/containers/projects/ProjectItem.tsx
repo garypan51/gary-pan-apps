@@ -28,8 +28,8 @@ export const ProjectItem = (props: IProps) => {
                 backgroundColor={props.backgroundColor}
                 cursor={"pointer"}
                 onClick={props.onProjectClick}
-                width={"20vw"}
-                height={"170px"}>
+                width={"21vw"}
+                height={"150px"}>
                 <Column transparent padding={"0 16px"}>
                     <Paragraph textColor={props.textColor}>{props.name}</Paragraph>
                 </Column>

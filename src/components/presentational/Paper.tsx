@@ -17,6 +17,7 @@ const StyledMaterialPaper = styled(MaterialPaper)`
         width: ${(props: IProps) => props.width ?? "auto"};
         height: ${(props: IProps) => props.height ?? "auto"};
         cursor: ${(props: IProps) => props.cursor ?? undefined};
+        overflow: hidden;
     };
 `
 

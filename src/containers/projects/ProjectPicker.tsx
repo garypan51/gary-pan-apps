@@ -39,7 +39,8 @@ export const ProjectPicker = (props: IProps) => {
             key={index}
             name={project.name}
             backgroundColor={project.backgroundColor}
-            textColor={project.textColor}/>
+            textColor={project.textColor}
+            onProjectClick={props.onProjectClick}/>
     ))
 
     return (

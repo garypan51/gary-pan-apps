@@ -13,6 +13,8 @@ import {useOnMobile} from "../../hooks/UseOnMobile";
 import {Paragraph} from "../../components/text/Paragraph";
 import {useDispatch} from "react-redux";
 import {setAppBarTitle} from "../../redux/actions/AppActions";
+import {Modal} from "../../components/presentational/Modal";
+import {ProjectModal} from "./ProjectModal";
 
 const bottomPickerBaseProps = {
     display: "flex",
@@ -22,14 +24,15 @@ const bottomPickerBaseProps = {
     right: 0,
     backgroundColor: Colors.dark.primaryColorDarkGradStart,
     width: "calc(100vw - 32px)",
-    height: "250px",
-    borderRadius: "20px"
+    height: "200px",
+    borderRadius: "10px"
 }
 
 export const Projects = () => {
     const theme = useContext(ThemeContext)
     const dispatch = useDispatch()
     const onMobile = useOnMobile()
+    const [projectModelOpen, setProjectModalOpen] = useState(false)
     const [ref, onOutsideClick, resetOnOutsideClick] = useOnOutsideClick()
     const [projectPickerOpen, setProjectPickerOpen] = useState(false)
 
