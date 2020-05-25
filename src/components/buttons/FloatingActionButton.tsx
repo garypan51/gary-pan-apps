@@ -14,6 +14,7 @@ interface IProps extends FabProps {
 
 const StyledFab = styled(Fab)`
     &.fab {
+        background-color: ${(props: IProps) => props.backgroundColor ?? props.theme.accentColor};
     }
 `
 

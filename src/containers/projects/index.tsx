@@ -1,15 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {Column} from "../../components/flexbox/Column"
 import {Header} from "../../components/text/Header"
-import {t} from "../../strings/i18n"
 import {animated, config, useSpring} from "react-spring";
 import {FloatingActionButton} from "../../components/buttons/FloatingActionButton";
 import AppsIcon from '@material-ui/icons/Apps';
-import {PagePicker} from "./PagePicker";
+import {ProjectPicker} from "./ProjectPicker";
 import styled, {ThemeContext} from "styled-components";
 import {Row} from "../../components/flexbox/Row";
 import {Colors} from "../../resources/Colors";
 import {useOnOutsideClick} from "../../hooks/UseOnOutsideClick";
+import {t} from "../../strings/i18n";
+import {useOnMobile} from "../../hooks/UseOnMobile";
 
 const GradientOverlay = styled(Row)`
     position: absolute;
@@ -18,14 +19,9 @@ const GradientOverlay = styled(Row)`
     background-color: ${Colors.dark.primaryColorDarkGradStart}
 `
 
-const BottomPagePickerContainer = styled(Column)`
-    @media (max-width: 768px) {
-        display: none;
-    }
-`
-
 export const Projects = () => {
     const theme = useContext(ThemeContext)
+    const onMobile = useOnMobile()
     const [ref, onOutsideClick, resetOnOutsideClick] = useOnOutsideClick()
     const [pagePickerOpen, setPagePickerOpen] = useState(false)
 
@@ -81,25 +77,27 @@ export const Projects = () => {
 
     return (
         <Column>
-            <Header margin={"0 16px"} type={"large"}>Projects</Header>
-            <BottomPagePickerContainer forwardRef={ref}>
-                <animated.div style={pagePickerButtonProps}>
-                    <FloatingActionButton
-                        theme={theme}
-                        onClick={() => setPagePickerOpen(prevState => !prevState)}>
-                        <AppsIcon/>
-                    </FloatingActionButton>
-                </animated.div>
-                <animated.div style={bottomPagePickerProps}>
-                    <Column transparent>
-                        <GradientOverlay
-                            transparent
-                            width={"100vw"}
-                            height={"250px"}/>
-                    </Column>
-                    <PagePicker onPageClick={() => setPagePickerOpen(false)}/>
-                </animated.div>
-            </BottomPagePickerContainer>
+            <Header margin={"0 16px"} type={"large"}>{t("projects.title")}</Header>
+            {!onMobile &&
+                <Column forwardRef={ref}>
+                    <animated.div style={pagePickerButtonProps}>
+                        <FloatingActionButton
+                            theme={theme}
+                            onClick={() => setPagePickerOpen(prevState => !prevState)}>
+                            <AppsIcon/>
+                        </FloatingActionButton>
+                    </animated.div>
+                    <animated.div style={bottomPagePickerProps}>
+                        <Column transparent>
+                            <GradientOverlay
+                                transparent
+                                width={"100vw"}
+                                height={"250px"}/>
+                        </Column>
+                        <ProjectPicker onPageClick={() => setPagePickerOpen(false)}/>
+                    </animated.div>
+                </Column>
+            }
         </Column>
     )
 }

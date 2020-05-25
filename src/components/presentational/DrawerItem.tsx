@@ -15,6 +15,7 @@ interface IProps {
 const StyledColumn = styled(Column)`
     background-color: ${(props: IProps) => props.selected ? props.theme.accentColor : undefined};
     border-radius: 4px;
+    cursor: pointer;
     padding: 0;
     :hover {
         background-color:  ${(props: IProps) => props.selected ? props.theme.accentColor : props.theme.rippleColor};

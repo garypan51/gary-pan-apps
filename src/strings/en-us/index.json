@@ -19,11 +19,17 @@
       "about" : {
         "title": "About"
       },
+      "aboutThisWebsite" : {
+        "title": "About This Website"
+      },
       "projects": {
         "title": "Projects"
       },
       "contact": {
         "title": "Contact Me"
+      },
+      "notFound": {
+        "title": "404 Not Found :("
       }
     }
   }

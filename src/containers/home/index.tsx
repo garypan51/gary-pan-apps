@@ -3,6 +3,7 @@ import {Column} from "../../components/flexbox/Column";
 import {Header} from "../../components/text/Header";
 import {Machine} from "xstate";
 import {useMachine} from "@xstate/react/lib";
+import {t} from "../../strings/i18n";
 
 const HOME_MACHINE_KEYS = {
     STATES: {
@@ -39,7 +40,7 @@ export const Home = () => {
         <Column
             width={"100%"}
             padding={"0 16px"}>
-            <Header>Home</Header>
+            <Header>{t("home.title")}</Header>
         </Column>
     )
 }

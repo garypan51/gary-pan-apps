@@ -1,11 +1,11 @@
 import {Links} from "../../resources/Links";
-import {Paragraph} from "../../components/text/Paragraph";
+import {Paragraph} from "../text/Paragraph";
 import {t} from "../../strings/i18n";
 import React, {useContext, useState} from "react";
 import styled, {ThemeContext} from "styled-components";
-import {Paper} from "../../components/presentational/Paper";
-import {Column} from "../../components/flexbox/Column";
-import {Row} from "../../components/flexbox/Row";
+import {Paper} from "./Paper";
+import {Column} from "../flexbox/Column";
+import {Row} from "../flexbox/Row";
 import {CSSTransition} from 'react-transition-group';
 
 interface IProps {

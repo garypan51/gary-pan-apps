@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import {DarkTheme, Theme} from "../../resources/Theme";
+import {Theme} from "../../resources/Theme";
 import {Colors} from "../../resources/Colors";
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {

@@ -21,7 +21,7 @@ interface IProps {
 export const App = (props: IProps) => {
     const dispatch = useDispatch()
     const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
-    // const showAppBar = useSelector((state: StoreState) => state.app.showAppBar)
+    const showAppBar = useSelector((state: StoreState) => state.app.showAppBar)
     const [appBarTitle, setAppBarTitle] = useState(t("app.name"))
     const [drawerOpen, setDrawerOpen] = useState(false)
     const onMobile = useOnMobile()

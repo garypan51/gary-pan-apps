@@ -1,11 +1,12 @@
 import React from "react"
 import {Routes, Route} from "react-router-dom"
 import {Home} from "../containers/home"
-import {About} from "../containers/about"
+import {AboutMe} from "../containers/aboutMe"
 import {Projects} from "../containers/projects"
 import {Contact} from "../containers/contact"
-import {NotFound} from "../containers/notFound/NotFound";
-import {t} from "../strings/i18n";
+import {AboutThisWebsite} from "../containers/aboutThisWebsite"
+import {NotFound} from "../containers/notFound/NotFound"
+import {t} from "../strings/i18n"
 
 export interface GPAPage {
     name: string
@@ -20,7 +21,7 @@ export const GPAPages: GPAPage[] = [
     },
     {
         name: t("about.title"),
-        path: "/about"
+        path: "/about-me"
     },
     {
         name: t("projects.title"),
@@ -29,6 +30,10 @@ export const GPAPages: GPAPage[] = [
     {
         name: t("contact.title"),
         path: "/contact"
+    },
+    {
+        name: t("aboutThisWebsite.title"),
+        path: "/about-this-website"
     }
 ]
 
@@ -36,9 +41,10 @@ export const createRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<Home/>} />
-            <Route path="/about" element={<About/>} />
+            <Route path="/about-me" element={<AboutMe/>} />
             <Route path="/projects" element={<Projects/>} />
             <Route path="/contact" element={<Contact/>} />
+            <Route path="/about-this-website" element={<AboutThisWebsite/>} />
             <Route path="*" element={<NotFound/>} />
         </Routes>
     )

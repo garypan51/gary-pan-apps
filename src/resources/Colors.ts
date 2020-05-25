@@ -1,8 +1,6 @@
 export const Colors = {
     dark: {
         primaryColor: "#202124",
-        primaryColorGradStart: "rgba(32, 33, 36, 0.5)",
-        primaryColorGradEnd: "rgba(32, 33, 36, 0.1)",
         primaryColorDark: "#111111",
         primaryColorDarkGradStart: "rgba(17, 17, 17, 0.3)",
         primaryColorDarkGradEnd: "rgba(17, 17, 17, 0.1)",
@@ -14,9 +12,11 @@ export const Colors = {
     light: {
         primaryColor: "#e4e4e4",
         primaryColorDark: "#d4d2d2",
+        primaryColorDarkGradStart: "rgba(17, 17, 17, 0.3)",
+        primaryColorDarkGradEnd: "rgba(17, 17, 17, 0.1)",
         secondaryColor: "#ffffff",
-        textColor: "#222222",
         accentColor: "#80CBC4",
+        textColor: "#222222",
         rippleColor: "rgba(0, 0, 0, 0.1)"
     },
     clearColor: "rgba(0, 0, 0, 0)",

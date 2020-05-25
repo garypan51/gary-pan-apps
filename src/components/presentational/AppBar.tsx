@@ -1,5 +1,4 @@
 import React, {ReactNode, useContext} from 'react';
-import {Theme} from "../../resources/Theme";
 import {Row} from '../flexbox/Row';
 import {ThemeContext} from "styled-components";
 
