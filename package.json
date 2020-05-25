@@ -33,7 +33,7 @@
     "rxjs": "^6.5.4",
     "source-map-explorer": "^2.4.2",
     "styled-components": "^5.1.0",
-    "typescript": "^3.8.3",
+    "typescript": "^3.9.3",
     "xstate": "^4.9.1"
   },
   "scripts": {
