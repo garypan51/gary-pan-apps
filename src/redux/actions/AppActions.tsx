@@ -10,6 +10,11 @@ export const setShowAppBar = (show: boolean) => ({
     show
 })
 
+export const setAppBarTitle = (title: string) => ({
+    type: APP.ACTION_SET_APP_BAR_TITLE,
+    title
+})
+
 export const setShowSourceCodeLink = (show: boolean) => ({
     type: APP.ACTION_SET_SHOW_SOURCE_CODE_LINK,
     show

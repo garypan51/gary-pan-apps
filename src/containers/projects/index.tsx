@@ -5,49 +5,61 @@ import {animated, config, useSpring} from "react-spring";
 import {FloatingActionButton} from "../../components/buttons/FloatingActionButton";
 import AppsIcon from '@material-ui/icons/Apps';
 import {ProjectPicker} from "./ProjectPicker";
-import styled, {ThemeContext} from "styled-components";
-import {Row} from "../../components/flexbox/Row";
+import {ThemeContext} from "styled-components";
 import {Colors} from "../../resources/Colors";
 import {useOnOutsideClick} from "../../hooks/UseOnOutsideClick";
 import {t} from "../../strings/i18n";
 import {useOnMobile} from "../../hooks/UseOnMobile";
+import {Paragraph} from "../../components/text/Paragraph";
+import {useDispatch} from "react-redux";
+import {setAppBarTitle} from "../../redux/actions/AppActions";
 
-const GradientOverlay = styled(Row)`
-    position: absolute;
-    bottom: -24px;
-    pointer-events: none;
-    background-color: ${Colors.dark.primaryColorDarkGradStart}
-`
+const bottomPickerBaseProps = {
+    display: "flex",
+    alignItems: "center",
+    position: "absolute" as "absolute",
+    left: 16,
+    right: 0,
+    backgroundColor: Colors.dark.primaryColorDarkGradStart,
+    width: "calc(100vw - 32px)",
+    height: "250px",
+    borderRadius: "20px"
+}
 
 export const Projects = () => {
     const theme = useContext(ThemeContext)
+    const dispatch = useDispatch()
     const onMobile = useOnMobile()
     const [ref, onOutsideClick, resetOnOutsideClick] = useOnOutsideClick()
-    const [pagePickerOpen, setPagePickerOpen] = useState(false)
+    const [projectPickerOpen, setProjectPickerOpen] = useState(false)
 
     useEffect(() => {
-        const pagePickerButtonStartY = pagePickerOpen ? "50px" : "-70px"
-        const pagePickerButtonEndY = pagePickerOpen ? "-70px" : "50px"
-        const pagePickerStartY = pagePickerOpen ? "-224px" : "24px"
-        const pagePickerEndY = pagePickerOpen ? "24px" : "-224px"
+        dispatch(setAppBarTitle(t("projects.title")))
+    }, [])
 
-        setPagePickerButtonProps({
+    useEffect(() => {
+        const projectPickerButtonStartY = projectPickerOpen ? "50px" : "-70px"
+        const projectPickerButtonEndY = projectPickerOpen ? "-70px" : "50px"
+        const projectPickerStartY = projectPickerOpen ? "-250px" : "24px"
+        const projectPickerEndY = projectPickerOpen ? "24px" : "-250px"
+
+        setProjectPickerButtonProps({
             config: config.gentle,
-            from: {position: "absolute", left: "50%", bottom: pagePickerButtonStartY},
-            to: {position: "absolute", left: "50%", bottom: pagePickerButtonEndY},
+            from: {position: "absolute", left: "50%", bottom: projectPickerButtonStartY},
+            to: {position: "absolute", left: "50%", bottom: projectPickerButtonEndY},
         })
 
-        setBottomPagePickerProps({
+        setBottomProjectPickerProps({
             config: config.gentle,
-            from: {position: "absolute", bottom: pagePickerStartY},
-            to: {position: "absolute", bottom: pagePickerEndY}
+            from: {position: "absolute", bottom: projectPickerStartY},
+            to: {position: "absolute", bottom: projectPickerEndY}
         })
 
         let debounce: NodeJS.Timeout | undefined = undefined
         resetOnOutsideClick()
         debounce = global.setTimeout(() => {
-            if(onOutsideClick && pagePickerOpen) {
-                setPagePickerOpen(false)
+            if(onOutsideClick && projectPickerOpen) {
+                setProjectPickerOpen(false)
                 resetOnOutsideClick()
             }
         }, 500)
@@ -56,45 +68,40 @@ export const Projects = () => {
                 clearTimeout(debounce);
             }
         }
-    }, [onOutsideClick, pagePickerOpen])
+    }, [onOutsideClick, projectPickerOpen])
 
     useEffect(() => {
-        if(onOutsideClick && pagePickerOpen) {
-            setPagePickerOpen(false)
+        if(onOutsideClick && projectPickerOpen) {
+            setProjectPickerOpen(false)
         }
     }, [onOutsideClick])
 
-    const [pagePickerButtonProps, setPagePickerButtonProps] = useSpring(() => ({
+    const [projectPickerButtonProps, setProjectPickerButtonProps] = useSpring(() => ({
         config: config.wobbly,
         from: {position: "absolute", left: "50%", bottom: "-70px"},
         to: {position: "absolute", left: "50%", bottom: "50px"},
     }))
-    const [bottomPagePickerProps, setBottomPagePickerProps] = useSpring(() => ({
+    const [bottomProjectPickerProps, setBottomProjectPickerProps] = useSpring(() => ({
         config: config.gentle,
-        from: {position: "absolute", bottom: "-224px"},
-        to: {position: "absolute", bottom: "-224px"}
+        from: {position: "absolute", bottom: "-250px"},
+        to: {position: "absolute", bottom: "-250px"}
     }))
 
     return (
         <Column>
             <Header margin={"0 16px"} type={"large"}>{t("projects.title")}</Header>
+            <Paragraph margin={"0 16px"}>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</Paragraph>
             {!onMobile &&
-                <Column forwardRef={ref}>
-                    <animated.div style={pagePickerButtonProps}>
+                <Column forwardRef={ref} overflow={"visible"}>
+                    <animated.div style={projectPickerButtonProps}>
                         <FloatingActionButton
                             theme={theme}
-                            onClick={() => setPagePickerOpen(prevState => !prevState)}>
+                            onClick={() => setProjectPickerOpen(prevState => !prevState)}>
                             <AppsIcon/>
                         </FloatingActionButton>
                     </animated.div>
-                    <animated.div style={bottomPagePickerProps}>
-                        <Column transparent>
-                            <GradientOverlay
-                                transparent
-                                width={"100vw"}
-                                height={"250px"}/>
-                        </Column>
-                        <ProjectPicker onPageClick={() => setPagePickerOpen(false)}/>
+                    <animated.div style={{...bottomProjectPickerProps, ...bottomPickerBaseProps}}>
+                        <ProjectPicker onProjectClick={() => setProjectPickerOpen(false)}/>
                     </animated.div>
                 </Column>
             }

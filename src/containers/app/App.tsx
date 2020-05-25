@@ -6,7 +6,7 @@ import {GPAAppBar} from "./GPAAppBar";
 import {ThemeProvider} from "styled-components";
 import {DarkTheme, LightTheme} from "../../resources/Theme";
 import {Column} from "../../components/flexbox/Column";
-import {setShowAppBar} from "../../redux/actions/AppActions";
+import {setAppBarTitle, setShowAppBar} from "../../redux/actions/AppActions";
 import {useSpring} from "react-spring";
 import {Drawer} from "../../components/containers/Drawer";
 import {t} from "../../strings/i18n";
@@ -22,7 +22,7 @@ export const App = (props: IProps) => {
     const dispatch = useDispatch()
     const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
     const showAppBar = useSelector((state: StoreState) => state.app.showAppBar)
-    const [appBarTitle, setAppBarTitle] = useState(t("app.name"))
+    const appBarTitle = useSelector((state: StoreState) => state.app.appBarTitle)
     const [drawerOpen, setDrawerOpen] = useState(false)
     const onMobile = useOnMobile()
 
@@ -41,7 +41,7 @@ export const App = (props: IProps) => {
     }, [dispatch])
 
     useEffect(() => {
-        setAppBarTitle(onMobile ? t("app.shortName") : t("app.name"))
+        dispatch(setAppBarTitle(onMobile ? t("app.shortName") : t("app.name")))
     }, [onMobile])
 
     return (

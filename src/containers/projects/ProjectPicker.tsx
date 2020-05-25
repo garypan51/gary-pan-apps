@@ -1,46 +1,57 @@
 import React from 'react';
 import {Row} from "../../components/flexbox/Row";
-import {Paper} from "../../components/presentational/Paper";
-import {Paragraph} from "../../components/text/Paragraph";
-import {Column} from "../../components/flexbox/Column";
+import {ProjectItem} from "./ProjectItem";
 
 interface IProps {
-    onPageClick?: () => void
+    onProjectClick?: () => void
 }
 
 const projects = [
     {
-        name: "Voluptatem Quia"
+        id: 0,
+        name: "Voluptatem Quia",
+        textColor: "#ffffff",
+        backgroundColor: "#0068D6"
     },
     {
-        name: "Numquam Eius"
+        id: 1,
+        name: "Numquam Eius",
+        textColor: "#AA13C6",
+        backgroundColor: "#00003F"
     },
     {
-        name: "Et Quasi Architecto"
+        id: 2,
+        name: "Et Quasi Architecto",
+        textColor: "#ffffff",
+        backgroundColor: "#2e7d32",
     },
     {
-        name: "Quis Autem"
+        id: 3,
+        name: "Quis Autem",
+        textColor: "#ffffff",
+        backgroundColor: "#4a148c"
     }
 ]
+
 export const ProjectPicker = (props: IProps) => {
-    const pages = projects.map((page, index) => (
-        <Paper
-            cursor={"pointer"}
-            onClick={props.onPageClick}
-            width={"20vw"}
-            height={"200px"}>
-            <Column transparent alignItems={"center"}>
-                <Paragraph>{page.name}</Paragraph>
-            </Column>
-        </Paper>
+    const projectItems = projects.map((project, index) => (
+        <ProjectItem
+            key={index}
+            name={project.name}
+            backgroundColor={project.backgroundColor}
+            textColor={project.textColor}/>
     ))
 
     return (
         <Row
             transparent
+            overflow={"visible"}
+            alignItems={"center"}
+            padding={"0 16px"}
             width={"100vw"}
+            height={"180px"}
             justifyContent={"space-around"}>
-            {pages}
+            {projectItems}
         </Row>
     )
 }
