@@ -49,7 +49,7 @@ export const App = (props: IProps) => {
             <Column
                 position={"relative"}
                 width={"100%"}
-                height={"100%"}>
+                height={"100vh"}>
                 <BrowserRouter>
                     <GPAAppBar title={appBarTitle} onMenuClick={() => setDrawerOpen(true)}/>
                     {props.routes}

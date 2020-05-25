@@ -41,10 +41,11 @@ export const createRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<Home/>} />
-            <Route path="/about-me" element={<AboutMe/>} />
-            <Route path="/projects" element={<Projects/>} />
-            <Route path="/contact" element={<Contact/>} />
-            <Route path="/about-this-website" element={<AboutThisWebsite/>} />
+            <Route path="about-me" element={<AboutMe/>} />
+            <Route path="projects" element={<Projects/>} />
+            <Route path="project/:id" element={<Projects/>} />
+            <Route path="contact" element={<Contact/>} />
+            <Route path="about-this-website" element={<AboutThisWebsite/>} />
             <Route path="*" element={<NotFound/>} />
         </Routes>
     )
