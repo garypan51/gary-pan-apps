@@ -13,8 +13,12 @@ import {useOnMobile} from "../../hooks/UseOnMobile";
 import {Paragraph} from "../../components/text/Paragraph";
 import {useDispatch} from "react-redux";
 import {setAppBarTitle} from "../../redux/actions/AppActions";
-import {Modal} from "../../components/presentational/Modal";
-import {ProjectModal} from "./ProjectModal";
+
+const bottomPickerButtonBaseProps = {
+    position: "absolute" as "absolute",
+    left: "50%",
+    bottom: "-70px",
+}
 
 const bottomPickerBaseProps = {
     display: "flex",
@@ -22,11 +26,14 @@ const bottomPickerBaseProps = {
     position: "absolute" as "absolute",
     left: 16,
     right: 0,
+    bottom: "-250px",
     backgroundColor: Colors.dark.primaryColorDarkGradStart,
     width: "calc(100vw - 32px)",
     height: "200px",
     borderRadius: "10px"
 }
+
+const yTransform = (y: any) => `translateY(${y}px)`
 
 export const Projects = () => {
     const theme = useContext(ThemeContext)
@@ -36,26 +43,30 @@ export const Projects = () => {
     const [ref, onOutsideClick, resetOnOutsideClick] = useOnOutsideClick()
     const [projectPickerOpen, setProjectPickerOpen] = useState(false)
 
+    const [projectPickerButtonProps, setProjectPickerButtonProps] = useSpring(() => ({
+        config: config.wobbly,
+        y: 0
+    }))
+    const [bottomProjectPickerProps, setBottomProjectPickerProps] = useSpring(() => ({
+        config: config.gentle,
+        y: 0
+    }))
+
     useEffect(() => {
         dispatch(setAppBarTitle(t("projects.title")))
+        const buttonTimeout = setTimeout(() => setProjectPickerButtonProps({y: -94}), 1000)
+        return () => clearTimeout(buttonTimeout)
     }, [])
 
     useEffect(() => {
-        const projectPickerButtonStartY = projectPickerOpen ? "50px" : "-70px"
-        const projectPickerButtonEndY = projectPickerOpen ? "-70px" : "50px"
-        const projectPickerStartY = projectPickerOpen ? "-250px" : "24px"
-        const projectPickerEndY = projectPickerOpen ? "24px" : "-250px"
-
         setProjectPickerButtonProps({
             config: config.gentle,
-            from: {position: "absolute", left: "50%", bottom: projectPickerButtonStartY},
-            to: {position: "absolute", left: "50%", bottom: projectPickerButtonEndY},
+            y: projectPickerOpen ? 0 : -94
         })
 
         setBottomProjectPickerProps({
             config: config.gentle,
-            from: {position: "absolute", bottom: projectPickerStartY},
-            to: {position: "absolute", bottom: projectPickerEndY}
+            y: projectPickerOpen ? -274 : 0
         })
 
         let debounce: NodeJS.Timeout | undefined = undefined
@@ -79,31 +90,21 @@ export const Projects = () => {
         }
     }, [onOutsideClick])
 
-    const [projectPickerButtonProps, setProjectPickerButtonProps] = useSpring(() => ({
-        config: config.wobbly,
-        from: {position: "absolute", left: "50%", bottom: "-70px"},
-        to: {position: "absolute", left: "50%", bottom: "50px"},
-    }))
-    const [bottomProjectPickerProps, setBottomProjectPickerProps] = useSpring(() => ({
-        config: config.gentle,
-        from: {position: "absolute", bottom: "-250px"},
-        to: {position: "absolute", bottom: "-250px"}
-    }))
-
     return (
         <Column>
             <Header margin={"0 16px"} type={"large"}>{t("projects.title")}</Header>
             <Paragraph margin={"0 16px"}>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</Paragraph>
             {!onMobile &&
                 <Column forwardRef={ref} overflow={"visible"}>
-                    <animated.div style={projectPickerButtonProps}>
+                    <animated.div style={{...{transform: projectPickerButtonProps.y.interpolate(yTransform)}, ...bottomPickerButtonBaseProps}}>
                         <FloatingActionButton
                             theme={theme}
                             onClick={() => setProjectPickerOpen(prevState => !prevState)}>
                             <AppsIcon/>
                         </FloatingActionButton>
                     </animated.div>
-                    <animated.div style={{...bottomProjectPickerProps, ...bottomPickerBaseProps}}>
+
+                    <animated.div style={{...{transform: bottomProjectPickerProps.y.interpolate(yTransform)}, ...bottomPickerBaseProps}}>
                         <ProjectPicker onProjectClick={() => setProjectPickerOpen(false)}/>
                     </animated.div>
                 </Column>
