@@ -8,6 +8,7 @@ interface IProps {
     textColor?: string
     margin?: string
     children: ReactNode
+    cursor?: string
 }
 
 const StyledParagraph = styled.p`
@@ -17,6 +18,7 @@ const StyledParagraph = styled.p`
     padding:0;
     line-height:40px;
     margin:${(props: IProps) => props.margin ?? "0"};
+    cursor: ${(props: IProps) => props.cursor ?? undefined};
 `
 
 export const Paragraph = (props: IProps) => {

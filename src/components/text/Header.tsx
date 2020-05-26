@@ -9,6 +9,8 @@ interface IProps {
     textColor?: string
     margin?: string
     children: ReactNode
+    cursor?: string
+    onHoverColor?: string
 }
 
 export const StyledHeader = styled.h1`
@@ -17,9 +19,15 @@ export const StyledHeader = styled.h1`
     color: ${(props: IProps) => props.textColor ?? props.theme?.textColor};
     text-align: center;
     padding: 0;
+    cursor: ${(props: IProps) => props.cursor ?? undefined};
     margin:${(props: IProps) => props.margin ?? "0"};
+    transition: 0.3s;
+    :hover {
+        color: ${(props: IProps) => props.onHoverColor ?? props.theme?.textColor};
+    }
 `
 
 export const Header = (props: IProps) => {
-    return <StyledHeader {...props}/>
+    return <StyledHeader {...props}
+    onMouseEnter={() => {}}/>
 }

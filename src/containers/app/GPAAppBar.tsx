@@ -25,7 +25,7 @@ interface IProps {
 
 const StyledAppBar = styled(AppBar)`
     width: 100%;
-    padding: 12px 16px 12px 4px;
+    padding: 12px 16px 12px 12px;
 `
 
 const AppBarTitle = styled(Header)`
@@ -64,10 +64,10 @@ export const GPAAppBar = (props: IProps) => {
                 <AppBarTitle>{props.title}</AppBarTitle>
             </Row>
             <Row transparent alignItems={"center"} padding={"8px 0 8px 8px"}>
-                <Avatar width={"40px"} height={"36px"} imgSrc={linkedInImgSrc} href={Links.linkedIn}/>
-                <Avatar width={"36px"} height={"36px"} imgSrc={githubImageSrc} href={Links.github}/>
+                <Avatar width={"40px"} height={"36px"} imgSrc={linkedInImgSrc} href={Links.linkedIn} margin={"0 32px 0 0"}/>
+                <Avatar width={"36px"} height={"36px"} imgSrc={githubImageSrc} href={Links.github} margin={"0 32px 0 0"}/>
                 { !onMobile &&
-                    <Avatar width={"60px"} imgSrc={mediumImageSrc} href={Links.medium}/>
+                    <Avatar width={"60px"} imgSrc={mediumImageSrc} href={Links.medium} margin={"0 10px 0 0"}/>
                 }
             </Row>
         </StyledAppBar>

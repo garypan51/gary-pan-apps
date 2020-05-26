@@ -1,6 +1,7 @@
 import React, {ReactNode, useContext} from 'react';
 import {Row} from '../flexbox/Row';
 import {ThemeContext} from "styled-components";
+import {Colors} from "../../resources/Colors";
 
 interface IProps {
     backgroundColor?: string
@@ -14,7 +15,7 @@ export const AppBar = (props: IProps) => {
     return (
         <Row
             className={props.className}
-            backgroundColor={theme.primaryColorDark}
+            backgroundColor={Colors.clearColor}
             justifyContent={"space-between"}
             alignItems={"center"}
             padding={"0 16px"}>

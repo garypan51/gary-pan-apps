@@ -17,7 +17,7 @@
         "title": "Home"
       },
       "about" : {
-        "title": "About"
+        "title": "About Me"
       },
       "aboutThisWebsite" : {
         "title": "About This Website"
@@ -26,7 +26,7 @@
         "title": "Projects"
       },
       "contact": {
-        "title": "Contact Me"
+        "title": "Contact"
       },
       "notFound": {
         "title": "404 Not Found :("
