@@ -45,7 +45,6 @@ export const ProjectPicker = (props: IProps) => {
 
     return (
         <Row
-            transparent
             overflow={"visible"}
             alignItems={"center"}
             padding={"0 16px"}

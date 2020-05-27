@@ -6,6 +6,7 @@ interface IProps {
     theme?: Theme
     type?: "normal" | "large"
     fontSize?: string
+    textAlign?: string
     textColor?: string
     margin?: string
     children: ReactNode
@@ -17,7 +18,7 @@ export const StyledHeader = styled.h1`
     font-family: Muli, sans-serif;
     font-size: ${(props: IProps) => props.fontSize ?? "30px"};
     color: ${(props: IProps) => props.textColor ?? props.theme?.textColor};
-    text-align: center;
+    text-align: ${(props: IProps) => props.textAlign ?? "center"};
     padding: 0;
     cursor: ${(props: IProps) => props.cursor ?? undefined};
     margin:${(props: IProps) => props.margin ?? "0"};
@@ -28,6 +29,5 @@ export const StyledHeader = styled.h1`
 `
 
 export const Header = (props: IProps) => {
-    return <StyledHeader {...props}
-    onMouseEnter={() => {}}/>
+    return <StyledHeader {...props} />
 }

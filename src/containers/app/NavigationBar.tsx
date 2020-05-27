@@ -51,7 +51,6 @@ export const NavigationBar = (props: IProps) => {
 
     return (
         <Row
-            transparent
             width={"100vw"}
             justifyContent={"flex-end"}
             padding={"0 2px 0 0"}>

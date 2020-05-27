@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import {Theme} from "../../resources/Theme";
-import {Colors} from "../../resources/Colors";
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
     forwardRef?: any
@@ -11,7 +10,6 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
     flex?: number | string
     width?: string
     height?: string
-    transparent?: boolean
     backgroundColor?: string
     justifyContent?: string
     alignItems?: string
@@ -32,7 +30,7 @@ const StyledColumn = styled.div`
     margin: ${(props: IProps) => props.margin ?? "0"};
     width: ${(props: IProps) => props.width ? props.width : "auto"};
     height: ${(props: IProps) => props.height ? props.height : "auto"};
-    background-color: ${(props: IProps) => props.transparent ? Colors.clearColor : props.backgroundColor ?? props.theme?.primaryColor};
+    background-color: ${(props: IProps) => props.backgroundColor};
 `
 
 export const Column = (props: IProps) => {

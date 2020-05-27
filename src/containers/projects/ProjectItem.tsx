@@ -30,7 +30,7 @@ export const ProjectItem = (props: IProps) => {
                 onClick={props.onProjectClick}
                 width={"21vw"}
                 height={"150px"}>
-                <Column transparent padding={"0 16px"}>
+                <Column padding={"0 16px"}>
                     <Paragraph textColor={props.textColor}>{props.name}</Paragraph>
                 </Column>
             </Paper>

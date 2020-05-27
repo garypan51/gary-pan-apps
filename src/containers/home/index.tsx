@@ -8,6 +8,16 @@ import {Paragraph} from "../../components/text/Paragraph";
 import {setAppBarTitle} from "../../redux/actions/AppActions";
 import {useDispatch} from "react-redux";
 import {useOnMobile} from "../../hooks/UseOnMobile";
+import styled from "styled-components";
+
+const Clouds = styled.img`
+    position: absolute;
+    top: 80%;
+    right: 10%;
+    width: 450px;
+    height: 200px;
+    z-index: -1;
+`
 
 const HOME_MACHINE_KEYS = {
     STATES: {
@@ -50,8 +60,9 @@ export const Home = () => {
         <Column
             width={"100%"}
             padding={"0 26px"}>
-            <Header>{t("home.title")}</Header>
-            <Paragraph margin={"0 16px"}>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</Paragraph>
+            <Header textAlign={"flex-start"} fontSize={"60px"}>Hello, I'm a frontend developer specializing in mobile.</Header>
+            <Paragraph margin={"0 8px"}>I also like animations :)</Paragraph>
+            {/*<Clouds src={"https://image.flaticon.com/icons/svg/414/414927.svg"}/>*/}
         </Column>
     )
 }

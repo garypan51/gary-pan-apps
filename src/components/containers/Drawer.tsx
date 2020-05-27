@@ -72,7 +72,7 @@ export const Drawer = ({theme, backgroundColor, width, height, onDismiss, ...res
 
     return (
         <StyledMaterialDrawer classes={{root: "drawer", paper: "paper"}} {...rest}>
-            <Column height={"100%"}>
+            <Column backgroundColor={theme.primaryColorDark} height={"100%"}>
                 <DrawerHeaderContainer width={"250px"} justifyContent={"space-between"} alignItems={"center"} padding={"0 16px"}>
                     <Paragraph>Quick Links</Paragraph>
                     <Tooltip title="Lights">
