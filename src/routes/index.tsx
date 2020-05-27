@@ -1,5 +1,5 @@
 import React from "react"
-import {Routes, Route} from "react-router-dom"
+import {Switch, Route} from "react-router-dom"
 import {Home} from "../containers/home"
 import {AboutMe} from "../containers/aboutMe"
 import {Projects} from "../containers/projects"
@@ -8,6 +8,7 @@ import {AboutThisWebsite} from "../containers/aboutThisWebsite"
 import {NotFound} from "../containers/notFound/NotFound"
 import {t} from "../strings/i18n"
 import {ProjectDetail} from "../containers/projects/detail/ProjectDetail";
+import * as H from "history";
 
 export interface GPAPage {
     name: string
@@ -38,18 +39,18 @@ export const GPAPages: GPAPage[] = [
     }
 ]
 
-export const createRoutes = () => {
+export const createRoutes = (location: H.Location) => {
     return (
-        <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/home" element={<Home/>} />
-            <Route path="/index.html" element={<Home/>} />
-            <Route path="about-me" element={<AboutMe/>} />
-            <Route path="projects" element={<Projects/>} />
-            <Route path="project/:id" element={<ProjectDetail/>} />
-            <Route path="contact" element={<Contact/>} />
-            <Route path="about-this-website" element={<AboutThisWebsite/>} />
-            <Route path="*" element={<NotFound/>} />
-        </Routes>
+        <Switch location={location}>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/index.html" component={Home} />
+            <Route exact path="/about-me" component={AboutMe} />
+            <Route exact path="/projects" component={Projects} />
+            <Route exact path="/project/:id" component={ProjectDetail} />
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/about-this-website" component={AboutThisWebsite} />
+            <Route exact path="*" component={NotFound} />
+        </Switch>
     )
 }

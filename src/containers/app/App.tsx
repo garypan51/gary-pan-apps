@@ -1,7 +1,7 @@
 import React, {ReactNode, useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {StoreState} from "../../redux/store"
-import {useLocation} from "react-router-dom";
+import {Route, Switch, useLocation} from "react-router-dom";
 import {GPAAppBar} from "./GPAAppBar";
 import styled, {ThemeProvider} from "styled-components";
 import {DarkTheme, LightTheme} from "../../resources/Theme";
@@ -14,11 +14,18 @@ import {NavigationBar} from "./NavigationBar";
 import {Header} from "../../components/text/Header";
 import {Row} from "../../components/flexbox/Row";
 import {ParallaxOverlay} from "./ParallaxOverlay";
+import {createRoutes} from "../../routes";
+import {Home} from "../home";
+import {AboutMe} from "../aboutMe";
+import {Projects} from "../projects";
+import {ProjectDetail} from "../projects/detail/ProjectDetail";
+import {Contact} from "../contact";
+import {AboutThisWebsite} from "../aboutThisWebsite";
+import {NotFound} from "../notFound/NotFound";
 
 const SHOW_SOURCE_CODE_LINK_DELAY = 1000
 
 interface IProps {
-    routes?: ReactNode
 }
 
 const ParallaxContainer = styled(Row)`
@@ -54,12 +61,13 @@ export const App = (props: IProps) => {
             position: 'absolute',
             top: 114,
             width: '100%',
-            opacity: 0,
             transform: 'translate(100%, 0)'
         },
-        enter: { opacity: 1, transform: 'translate(0%, 0)' },
-        leave: { opacity: 0, transform: 'translate(-50%, 0)' },
-        config: config.slow
+        enter: { transform: 'translate(0%, 0)' },
+        leave: { transform: 'translate(-100%, 0)' },
+        config: {
+            duration: 1000
+        }
     })
 
     const appBarProps = useSpring({
@@ -68,19 +76,17 @@ export const App = (props: IProps) => {
         from: {opacity: 0}
     })
 
-    useEffect(() => {
-        const showSourceCodeTimeout = setTimeout(() => {
-            dispatch(setShowAppBar(true))
-        }, SHOW_SOURCE_CODE_LINK_DELAY)
-        return () => { clearTimeout(showSourceCodeTimeout) }
-    }, [dispatch])
-
-    const routes = props.routes
+    // useEffect(() => {
+    //     const showSourceCodeTimeout = setTimeout(() => {
+    //         dispatch(setShowAppBar(true))
+    //     }, SHOW_SOURCE_CODE_LINK_DELAY)
+    //     return () => { clearTimeout(showSourceCodeTimeout) }
+    // }, [dispatch])
 
     const animatedRoutes = transitions.map( ({ item, props, key }) => {
         return (
             <animated.div key={key} style={props}>
-                {routes}
+                {createRoutes(item)}
             </animated.div>
         )
     })
@@ -98,6 +104,7 @@ export const App = (props: IProps) => {
                 {/*<NavigationBar />*/}
                 <Drawer
                     theme={theme}
+                    location={location}
                     onDismiss={() => setDrawerOpen(false)}
                     anchor={"left"}
                     open={drawerOpen}

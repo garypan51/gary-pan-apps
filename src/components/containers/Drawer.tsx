@@ -13,11 +13,12 @@ import {Column} from "../flexbox/Column";
 import {Paragraph} from "../text/Paragraph";
 import {GPAPages} from "../../routes";
 import {DrawerItem} from "../presentational/DrawerItem";
-import {useLocation} from "react-router";
-import {useNavigate} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
+import * as H from "history";
 
 interface IProps extends DrawerProps {
     theme: Theme
+    location: H.Location
     backgroundColor?: string
     width?: string
     height?: string
@@ -54,10 +55,9 @@ const StyledDrawerItem = styled(DrawerItem)`
     }
 `
 
-export const Drawer = ({theme, backgroundColor, width, height, onDismiss, ...rest }: IProps) => {
+export const Drawer = ({theme, location, backgroundColor, width, height, onDismiss, ...rest }: IProps) => {
     const dispatch = useDispatch()
-    const location = useLocation()
-    const navigate = useNavigate()
+    const history = useHistory()
     const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
     const lightIcon = darkModeEnabled ? <LightsOffIcon style={{fill: Colors.dark.textColor}}/> : <LightsOnIcon style={{fill: Colors.light.textColor}}/>
 
@@ -66,7 +66,7 @@ export const Drawer = ({theme, backgroundColor, width, height, onDismiss, ...res
     }
 
     const onDrawerItemClick = (path: string) => {
-        navigate(path)
+        history.push(path)
         onDismiss?.()
     }
 
@@ -86,13 +86,13 @@ export const Drawer = ({theme, backgroundColor, width, height, onDismiss, ...res
                 </DrawerHeaderContainer>
                 {
                     GPAPages.map((page, index) =>
-                                <StyledDrawerItem
-                                    key={index}
-                                    onClick={() => onDrawerItemClick(page.path)}
-                                    className={"drawer-item"}
-                                    title={page.name}
-                                    selected={page.path === location.pathname}/>
-                                )
+                        <StyledDrawerItem
+                            key={index}
+                            onClick={() => onDrawerItemClick(page.path)}
+                            className={"drawer-item"}
+                            title={page.name}
+                            selected={page.path === location.pathname}/>
+                        )
                 }
             </Column>
         </StyledMaterialDrawer>
