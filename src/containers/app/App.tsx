@@ -28,23 +28,8 @@ const SHOW_SOURCE_CODE_LINK_DELAY = 1000
 interface IProps {
 }
 
-const ParallaxContainer = styled(Row)`
-    position: absolute;
-    top: 78px;
-`
-
-const Clouds = styled.img`
-    // position: absolute;
-    // top: 80%;
-    // right: 10%;
-    width: 450px;
-    height: 200px;
-    // z-index: -1;
-`
-
 export const App = (props: IProps) => {
     const dispatch = useDispatch()
-    const parallaxRef = useRef()
     const location = useLocation()
     const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
     const theme = darkModeEnabled ? DarkTheme : LightTheme
@@ -62,11 +47,11 @@ export const App = (props: IProps) => {
             top: 114,
             width: '100%',
             opacity: 0,
-            transform: 'scale(0.8, 0.8)'
+            transform: 'scale(0.8)'
         },
-        enter: { opacity: 1, transform: 'scale(1, 1)' },
-        leave: { opacity: 0, transform: 'scale(0.8, 0.8)' },
-        config: config.gentle
+        enter: { opacity: 1, transform: 'scale(1)' },
+        leave: { opacity: 0 },
+        config: config.molasses
     })
 
     const appBarProps = useSpring({
@@ -98,9 +83,7 @@ export const App = (props: IProps) => {
                 width={"100%"}
                 height={"100vh"}>
                 <GPAAppBar title={""} onMenuClick={() => setDrawerOpen(true)}/>
-                <ParallaxOverlay pages={3}/>
                 {animatedRoutes}
-                {/*<NavigationBar />*/}
                 <Drawer
                     theme={theme}
                     location={location}

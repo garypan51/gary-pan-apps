@@ -6,6 +6,7 @@ export interface Theme {
     secondaryColor: string
     accentColor: string
     textColor: string
+    textColorAlt: string
     rippleColor: string
 }
 
@@ -15,6 +16,7 @@ export const DarkTheme = {
     secondaryColor: Colors.dark.secondaryColor,
     accentColor: Colors.dark.accentColor,
     textColor: Colors.dark.textColor,
+    textColorAlt: Colors.dark.textColorAlt,
     rippleColor: Colors.dark.rippleColor
 }
 
@@ -24,5 +26,6 @@ export const LightTheme = {
     secondaryColor: Colors.light.secondaryColor,
     accentColor: Colors.light.accentColor,
     textColor: Colors.light.textColor,
+    textColorAlt: Colors.light.textColorAlt,
     rippleColor: Colors.light.rippleColor
 }

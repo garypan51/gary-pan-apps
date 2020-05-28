@@ -5,8 +5,9 @@ export const Colors = {
         primaryColorDarkGradStart: "rgba(17, 17, 17, 0.3)",
         primaryColorDarkGradEnd: "rgba(17, 17, 17, 0.1)",
         secondaryColor: "#2b2c30",
-        accentColor: "#005A5A",
+        accentColor: "#d3bc8d",
         textColor: "#d6d4d4",
+        textColorAlt: "#000000",
         rippleColor: "rgba(255, 255, 255, 0.2)",
     },
     light: {
@@ -17,6 +18,7 @@ export const Colors = {
         secondaryColor: "#ffffff",
         accentColor: "#80CBC4",
         textColor: "#222222",
+        textColorAlt: "#d6d4d4",
         rippleColor: "rgba(0, 0, 0, 0.1)"
     },
     clearColor: "rgba(0, 0, 0, 0)",

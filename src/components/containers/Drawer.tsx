@@ -49,6 +49,7 @@ const DrawerHeaderContainer = styled(Row)`
 `
 
 const StyledDrawerItem = styled(DrawerItem)`
+    margin-left: 4px;
     padding-left: 16px;
     margin-bottom: 4px;
     :hover {
@@ -91,7 +92,8 @@ export const Drawer = ({theme, location, backgroundColor, width, height, onDismi
                             onClick={() => onDrawerItemClick(page.path)}
                             className={"drawer-item"}
                             title={page.name}
-                            selected={page.path === location.pathname}/>
+                            selected={page.path === location.pathname}
+                            selectedTextColor={theme.textColorAlt}/>
                         )
                 }
             </Column>
