@@ -61,13 +61,12 @@ export const App = (props: IProps) => {
             position: 'absolute',
             top: 114,
             width: '100%',
-            transform: 'translate(100%, 0)'
+            opacity: 0,
+            transform: 'scale(0.8, 0.8)'
         },
-        enter: { transform: 'translate(0%, 0)' },
-        leave: { transform: 'translate(-100%, 0)' },
-        config: {
-            duration: 1000
-        }
+        enter: { opacity: 1, transform: 'scale(1, 1)' },
+        leave: { opacity: 0, transform: 'scale(0.8, 0.8)' },
+        config: config.gentle
     })
 
     const appBarProps = useSpring({

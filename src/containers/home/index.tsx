@@ -8,16 +8,6 @@ import {Paragraph} from "../../components/text/Paragraph";
 import {setAppBarTitle} from "../../redux/actions/AppActions";
 import {useDispatch} from "react-redux";
 import {useOnMobile} from "../../hooks/UseOnMobile";
-import styled from "styled-components";
-
-const Clouds = styled.img`
-    position: absolute;
-    top: 80%;
-    right: 10%;
-    width: 450px;
-    height: 200px;
-    z-index: -1;
-`
 
 const HOME_MACHINE_KEYS = {
     STATES: {
@@ -62,7 +52,6 @@ export const Home = () => {
             padding={"0 26px"}>
             <Header textAlign={"flex-start"} fontSize={"60px"}>Hello, I'm a frontend developer specializing in mobile.</Header>
             <Paragraph margin={"0 8px"}>I also like animations :)</Paragraph>
-            {/*<Clouds src={"https://image.flaticon.com/icons/svg/414/414927.svg"}/>*/}
         </Column>
     )
 }
