@@ -11,6 +11,7 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
     width?: string
     height?: string
     backgroundColor?: string
+    background?: string
     justifyContent?: string
     alignItems?: string
     padding?: string
@@ -31,6 +32,7 @@ const StyledColumn = styled.div`
     width: ${(props: IProps) => props.width ? props.width : "auto"};
     height: ${(props: IProps) => props.height ? props.height : "auto"};
     background-color: ${(props: IProps) => props.backgroundColor};
+    background: ${(props: IProps) => props.background};
 `
 
 export const Column = (props: IProps) => {

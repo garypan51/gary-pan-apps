@@ -15,6 +15,7 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
     alignItems?: string
     padding?: string
     margin?: string
+    pointerEvents?: string
 }
 
 const StyledRow = styled.div`
@@ -31,6 +32,7 @@ const StyledRow = styled.div`
     width: ${(props: IProps) => props.width ? props.width : "auto"};
     height: ${(props: IProps) => props.height ? props.height : "auto"};
     background-color: ${(props: IProps) => props.backgroundColor};
+    pointerEvents?: ${(props: IProps) => props.pointerEvents};
 `
 
 export const Row = (props: IProps) => {
