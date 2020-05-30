@@ -11,36 +11,14 @@ import {StoreState} from "../../redux/store";
 import {DarkTheme, LightTheme} from "../../resources/Theme";
 import {useOnMobile} from "../../hooks/UseOnMobile";
 import {useOnOutsideClick} from "../../hooks/UseOnOutsideClick";
+import {GPAPages} from "../../routes";
 
 interface IProps {
     onPageClick?: () => void
 }
 
 const pages = [
-    {
-        id: 0,
-        name: "Voluptatem Quia",
-        textColor: "#ffffff",
-        backgroundColor: "#0068D6"
-    },
-    {
-        id: 1,
-        name: "Numquam Eius",
-        textColor: "#AA13C6",
-        backgroundColor: "#00003F"
-    },
-    {
-        id: 2,
-        name: "Et Quasi Architecto",
-        textColor: "#ffffff",
-        backgroundColor: "#2e7d32",
-    },
-    {
-        id: 3,
-        name: "Quis Autem",
-        textColor: "#ffffff",
-        backgroundColor: "#4a148c"
-    }
+    GPAPages[1], GPAPages[2], GPAPages[3], GPAPages[4]
 ]
 
 const yTransform = (y: any) => `translateY(${y}px)`
@@ -58,17 +36,15 @@ const PageContainer = (props: IProps) => {
     return (
         <Row
             pointerEvents={"none"}
-            backgroundColor={"rgba(255, 255, 255, 0.1)"}
             overflow={"visible"}
             width={"100vw"}
-            height={"180px"}
+            height={"200px"}
             justifyContent={"space-around"}
-            alignItems={"flex-end"}>
+            alignItems={"center"}>
             {pageItems}
         </Row>
     )
 }
-
 
 const pickerButtonBaseProps = {
     position: "absolute" as "absolute",
@@ -81,7 +57,11 @@ const pickerBaseProps = {
     justifyContent: "flex-end",
     position: "absolute" as "absolute",
     bottom: -250,
-    backgroundColor: Colors.dark.primaryColorDarkGradStart,
+    left: 0,
+    right: 0,
+    margin: "0 16px",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderRadius: 20
 }
 
 export const PagePicker = () => {
@@ -102,7 +82,7 @@ export const PagePicker = () => {
     }))
 
     useEffect(() => {
-        const buttonTimeout = setTimeout(() => setPagePickerButtonProps({y: -94}), 1000)
+        const buttonTimeout = setTimeout(() => setPagePickerButtonProps({y: -94}), 500)
         return () => clearTimeout(buttonTimeout)
     }, [])
 

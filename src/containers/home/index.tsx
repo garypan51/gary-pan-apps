@@ -4,26 +4,30 @@ import {t} from "../../strings/i18n";
 import {setAppBarTitle} from "../../redux/actions/AppActions";
 import {useDispatch} from "react-redux";
 import {useOnMobile} from "../../hooks/UseOnMobile";
-import {PageItem2} from "./PageItem2";
-import {animated, useSpring} from "react-spring"
+import {Header} from "../../components/text/Header";
+import {animated, useSpring, config} from "react-spring";
 
 export const Home = () => {
     const dispatch = useDispatch()
     const onMobile = useOnMobile()
 
+    const headerProps = useSpring({
+        config: config.molasses,
+        from: {opacity: 0},
+        to:  {opacity: 1}
+    })
+
     useEffect(() => {
         dispatch(setAppBarTitle(onMobile ? t("app.shortName") : t("app.name")))
     }, [onMobile])
 
-    const [pageItemProps, setPageItemsProps] = useSpring(() => ({
-
-    }))
-
     return (
         <Column
             width={"100%"}
-            padding={"0 26px"}>
-            {/*<Header textAlign={"flex-start"} fontSize={"60px"}>Hello, I'm a frontend developer specializing in mobile.</Header>*/}
+            padding={"16px 26px 0 26px"}>
+            <animated.div style={headerProps} >
+                <Header textAlign={"flex-start"} fontSize={"50px"}>Hello, I'm a frontend developer.</Header>
+            </animated.div>
             {/*<Paragraph margin={"0 8px"}>I also like animations :)</Paragraph>*/}
             {/*<animated.div style={pageItemProps}>*/}
             {/*    <PageItem2/>*/}

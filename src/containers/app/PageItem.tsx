@@ -1,16 +1,15 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {Paper} from "../../components/presentational/Paper";
 import {Paragraph} from "../../components/text/Paragraph";
 import {Column} from "../../components/flexbox/Column";
 import {animated, config, useSpring} from "react-spring";
 import {useWindowSize} from "../../hooks/UseWindowSize";
-import ReactDOM from 'react-dom';
 import {ElementUtils} from "../../utils/ElementUtils";
 
 interface IProps {
     name: string
-    backgroundColor: string
-    textColor: string
+    backgroundColor?: string
+    textColor?: string
     onPageClick?: () => void
 }
 
@@ -19,6 +18,7 @@ const transform = (x: any, y: any, s: any) => `translateX(${x}px) translateY(${y
 export const PageItem = (props: IProps) => {
     const ref: any = useRef()
     const size = useWindowSize()
+    const [selected, setSelected] = useState(false)
 
     const [pageItemProps, setPageItemProps] = useSpring(() => ({
         config: config.default,
@@ -29,18 +29,18 @@ export const PageItem = (props: IProps) => {
     }))
 
     const animateUp = () => {
+        setSelected(true)
         setPageItemProps({
             transformXYScale: [ElementUtils.getTranslateToMiddleX(size.width!, ref.current.getBoundingClientRect().x, ref.current.getBoundingClientRect().width / 2), -((size.height! - 174) / 2), 1],
-            width: `${size.width!}px`,
-            height: `${size.height!}px`,
         })
     }
 
     const scaleOnHover = (hover: boolean) => {
-        console.log(ref.current.getBoundingClientRect())
-        setPageItemProps({
-            transformXYScale: [0, 0, hover ? 1.05 : 1],
-        })
+        if (!selected) {
+            setPageItemProps({
+                transformXYScale: [0, 0, hover ? 1.05 : 1],
+            })
+        }
     }
 
     return (
@@ -53,7 +53,7 @@ export const PageItem = (props: IProps) => {
             onMouseEnter={() => scaleOnHover(true)}
             onMouseLeave={() => scaleOnHover(false)}>
             <Paper
-                backgroundColor={props.backgroundColor}
+                backgroundColor={props.backgroundColor ?? "#ffffff"}
                 cursor={"pointer"}
                 onClick={props.onPageClick}
                 >

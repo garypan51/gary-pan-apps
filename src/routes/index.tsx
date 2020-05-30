@@ -13,29 +13,40 @@ import * as H from "history";
 export interface GPAPage {
     name: string
     path: string
+    textColor?: string
     backgroundColor?: string
 }
 
 export const GPAPages: GPAPage[] = [
     {
         name: t("home.title"),
-        path: "/"
+        path: "/",
+        textColor: "#ffffff",
+        backgroundColor: "#0068D6"
     },
     {
         name: t("about.title"),
-        path: "/about-me"
+        path: "/about-me",
+        textColor: "#AA13C6",
+        backgroundColor: "#00003F"
     },
     {
         name: t("projects.title"),
-        path: "/projects"
+        path: "/projects",
+        textColor: "#ffffff",
+        backgroundColor: "#2e7d32",
     },
     {
         name: t("contact.title"),
-        path: "/contact"
+        path: "/contact",
+        textColor: "#ffffff",
+        backgroundColor: "#4a148c"
     },
     {
         name: t("aboutThisWebsite.title"),
-        path: "/about-this-website"
+        path: "/about-this-website",
+        textColor: "#ffffff",
+        backgroundColor: "#0068D6"
     }
 ]
 
