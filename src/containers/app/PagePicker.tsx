@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Row} from "../../components/flexbox/Row";
 import {PageItem} from "./PageItem";
-import {Colors} from "../../resources/Colors";
 import {Column} from "../../components/flexbox/Column";
 import {animated, config, useSpring} from "react-spring";
 import {FloatingActionButton} from "../../components/buttons/FloatingActionButton";
@@ -24,14 +23,26 @@ const pages = [
 const yTransform = (y: any) => `translateY(${y}px)`
 
 const PageContainer = (props: IProps) => {
-    const pageItems = pages.map((page, index) => (
-        <PageItem
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+
+    const onPageClick = (index: number) => {
+        setSelectedIndex(index)
+        // props.onPageClick?.()
+    }
+
+    const pageItems = pages.map((page, index) => {
+        const unselected = selectedIndex != null && selectedIndex !== index
+        return (
+            <PageItem
             key={index}
+            width={unselected ? "21vw" : "21vw"}
             name={page.name}
+            expanded={unselected}
             backgroundColor={page.backgroundColor}
             textColor={page.textColor}
-            onPageClick={props.onPageClick}/>
-    ))
+            onPageClick={() => onPageClick(index)}/>
+        )
+    })
 
     return (
         <Row
@@ -97,19 +108,7 @@ export const PagePicker = () => {
             y: pagePickerOpen ? -274 : 0
         })
 
-        let debounce: NodeJS.Timeout | undefined = undefined
         resetOnOutsideClick()
-        debounce = global.setTimeout(() => {
-            if(onOutsideClick && pagePickerOpen) {
-                setPagePickerOpen(false)
-                resetOnOutsideClick()
-            }
-        }, 500)
-        return () => {
-            if (debounce) {
-                clearTimeout(debounce);
-            }
-        }
     }, [onOutsideClick, pagePickerOpen])
 
     useEffect(() => {
