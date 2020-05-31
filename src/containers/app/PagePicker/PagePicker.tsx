@@ -1,86 +1,40 @@
 import React, {useEffect, useState} from 'react';
-import {Row} from "../../components/flexbox/Row";
-import {PageItem} from "./PageItem";
-import {Column} from "../../components/flexbox/Column";
+import {PageContainer} from "./PageContainer";
+import {Column} from "../../../components/flexbox/Column";
 import {animated, config, useSpring} from "react-spring";
-import {FloatingActionButton} from "../../components/buttons/FloatingActionButton";
+import {FloatingActionButton} from "../../../components/buttons/FloatingActionButton";
 import AppsIcon from "@material-ui/icons/Apps";
-import {useSelector} from "react-redux";
-import {StoreState} from "../../redux/store";
-import {DarkTheme, LightTheme} from "../../resources/Theme";
-import {useOnMobile} from "../../hooks/UseOnMobile";
-import {useOnOutsideClick} from "../../hooks/UseOnOutsideClick";
-import {GPAPages} from "../../routes";
+import {useOnMobile} from "../../../hooks/UseOnMobile";
+import {useOnOutsideClick} from "../../../hooks/UseOnOutsideClick";
+import {Theme} from "../../../resources/Theme";
 
 interface IProps {
+    theme: Theme
     onPageClick?: () => void
-}
-
-const pages = [
-    GPAPages[1], GPAPages[2], GPAPages[3], GPAPages[4]
-]
-
-const yTransform = (y: any) => `translateY(${y}px)`
-
-const PageContainer = (props: IProps) => {
-    const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-
-    const onPageClick = (index: number) => {
-        setSelectedIndex(index)
-        // props.onPageClick?.()
-    }
-
-    const pageItems = pages.map((page, index) => {
-        const unselected = selectedIndex != null && selectedIndex !== index
-        return (
-            <PageItem
-            key={index}
-            width={unselected ? "21vw" : "21vw"}
-            name={page.name}
-            expanded={unselected}
-            backgroundColor={page.backgroundColor}
-            textColor={page.textColor}
-            onPageClick={() => onPageClick(index)}/>
-        )
-    })
-
-    return (
-        <Row
-            pointerEvents={"none"}
-            overflow={"visible"}
-            width={"100vw"}
-            height={"200px"}
-            justifyContent={"space-around"}
-            alignItems={"center"}>
-            {pageItems}
-        </Row>
-    )
 }
 
 const pickerButtonBaseProps = {
     position: "absolute" as "absolute",
     bottom: "-70px",
-    left: "50%",
+    left: "calc(50vw - 32px)",
 }
 
 const pickerBaseProps = {
-    display: "flex",
-    justifyContent: "flex-end",
     position: "absolute" as "absolute",
     bottom: -250,
+    display: "flex",
+    justifyContent: "flex-end",
     left: 0,
     right: 0,
-    margin: "0 16px",
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-    borderRadius: 20
 }
 
-export const PagePicker = () => {
-    const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
-    const theme = darkModeEnabled ? DarkTheme : LightTheme
+const yTransform = (y: any) => `translateY(${y}px)`
+
+export const PagePicker = (props: IProps) => {
     const onMobile = useOnMobile()
-    const [pageModelOpen, setPageModalOpen] = useState(false)
+
     const [ref, onOutsideClick, resetOnOutsideClick] = useOnOutsideClick()
+    const [pageModelOpen, setPageModalOpen] = useState(false)
     const [pagePickerOpen, setPagePickerOpen] = useState(false)
 
     const [pagePickerButtonProps, setPagePickerButtonProps] = useSpring(() => ({
@@ -123,14 +77,14 @@ export const PagePicker = () => {
                 <Column forwardRef={ref} overflow={"visible"}>
                     <animated.div style={{...{transform: pagePickerButtonProps.y.interpolate(yTransform)}, ...pickerButtonBaseProps}}>
                         <FloatingActionButton
-                            theme={theme}
+                            theme={props.theme}
                             onClick={() => setPagePickerOpen(prevState => !prevState)}>
                             <AppsIcon/>
                         </FloatingActionButton>
                     </animated.div>
 
                     <animated.div style={{...{transform: PagePickerProps.y.interpolate(yTransform)}, ...pickerBaseProps}}>
-                        <PageContainer onPageClick={() => setPagePickerOpen(false)}/>
+                        <PageContainer theme={props.theme} onPageClick={() => setPagePickerOpen(false)}/>
                     </animated.div>
                 </Column>
             }

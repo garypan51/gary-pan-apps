@@ -22,4 +22,3 @@ export const useOnOutsideClick = (): [MutableRefObject<any>, boolean, () => void
 
     return [ref, onOutsideClick, reset]
 }
-

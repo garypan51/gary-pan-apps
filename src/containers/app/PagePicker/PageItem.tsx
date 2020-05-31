@@ -1,10 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Paper} from "../../components/presentational/Paper";
-import {Paragraph} from "../../components/text/Paragraph";
-import {Column} from "../../components/flexbox/Column";
+import React, {useEffect, useRef, useState} from "react";
+import {useWindowSize} from "../../../hooks/UseWindowSize";
 import {animated, config, useSpring} from "react-spring";
-import {useWindowSize} from "../../hooks/UseWindowSize";
-import {ElementUtils} from "../../utils/ElementUtils";
+import {ElementUtils} from "../../../utils/ElementUtils";
+import {Column} from "../../../components/flexbox/Column";
+import {Header} from "../../../components/text/Header";
 
 interface IProps {
     key: number
@@ -55,36 +54,31 @@ export const PageItem = (props: IProps) => {
         }
     }
 
-    useEffect(() => {
-        setPageItemProps({
-            width: props.width
-        })
-    }, [props.width])
-
-    useEffect(() => {
-        if(props.expanded) {
-            animateHorizontally()
-        }
-    }, [props.expanded])
+    // useEffect(() => {
+    //     setPageItemProps({
+    //         width: props.width
+    //     })
+    // }, [props.width])
+    //
+    // useEffect(() => {
+    //     if(props.expanded) {
+    //         animateHorizontally()
+    //     }
+    // }, [props.expanded])
 
     return (
-        <animated.div
-            // @ts-ignore
-            ref={ref}
-            // @ts-ignore
-            style={{...{transform: pageItemProps.transformXYScale.interpolate(transform)}, ...{cursor: "pointer", backgroundColor: pageItemProps.backgroundColor, width: pageItemProps.width, height: pageItemProps.height}}}
-            onClick={animateToCenter}
-            onMouseEnter={() => scaleOnHover(true)}
-            onMouseLeave={() => scaleOnHover(false)}>
-            <Paper
-                backgroundColor={props.backgroundColor}
-                >
-                <Column padding={"0 16px"}>
-                    <Paragraph textColor={props.textColor}>{props.name}</Paragraph>
-                </Column>
-            </Paper>
-
-        </animated.div>
+        // <animated.div
+        //     // @ts-ignore
+        //     ref={ref}
+        //     // @ts-ignore
+        //     style={{...{transform: pageItemProps.transformXYScale.interpolate(transform)}, ...{cursor: "pointer", backgroundColor: pageItemProps.backgroundColor, width: pageItemProps.width, height: pageItemProps.height}}}
+        //     onClick={animateToCenter}
+        //     onMouseEnter={() => scaleOnHover(true)}
+        //     onMouseLeave={() => scaleOnHover(false)}>
+            <Column backgroundColor={props.backgroundColor} padding={"16px 16px"}>
+                <Header fontSize={"16px"} textColor={props.textColor}>{props.name}</Header>
+            </Column>
+        // </animated.div>
     )
 }
 

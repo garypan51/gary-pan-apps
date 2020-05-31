@@ -50,7 +50,7 @@ export const GPAPages: GPAPage[] = [
     }
 ]
 
-export const createRoutes = (location: H.Location) => {
+export const createRoutes = (location?: H.Location) => {
     return (
         <Switch location={location}>
             <Route exact path="/" component={Home} />

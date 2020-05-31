@@ -4,7 +4,6 @@ import {Theme} from "../../resources/Theme"
 
 interface IProps {
     theme?: Theme
-    type?: "normal" | "large"
     fontSize?: string
     textAlign?: string
     textColor?: string
@@ -18,7 +17,7 @@ export const StyledHeader = styled.h1`
     font-family: Muli, sans-serif;
     font-size: ${(props: IProps) => props.fontSize ?? "30px"};
     color: ${(props: IProps) => props.textColor ?? props.theme?.textColor};
-    text-align: ${(props: IProps) => props.textAlign ?? "center"};
+    text-align: ${(props: IProps) => props.textAlign ?? undefined};
     padding: 0;
     cursor: ${(props: IProps) => props.cursor ?? undefined};
     margin:${(props: IProps) => props.margin ?? "0"};

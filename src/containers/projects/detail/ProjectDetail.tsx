@@ -96,7 +96,7 @@ export const ProjectDetail = (props: IProps) => {
 
     return (
         <Column width={"100%"} height={"100%"} backgroundColor={props.backgroundColor ?? "darkBlue"}>
-            <Header margin={"0 16px"} type={"large"}>{t("projects.titlfdase")}</Header>
+            <Header margin={"0 16px"}>{t("projects.titlfdase")}</Header>
             <Paragraph margin={"0 16px"}>Sed ut perspquatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</Paragraph>
             { !onMobile &&
                 <Column forwardRef={ref} overflow={"visible"}>
