@@ -22,7 +22,7 @@ const StyledParagraph = styled.p`
     margin:${(props: IProps) => props.margin ?? "0"};
     cursor: ${(props: IProps) => props.cursor ?? undefined};
     :hover {
-        color: ${(props: IProps) => props.onHoverColor ?? props.theme?.textColor};
+        color: ${(props: IProps) => props.onHoverColor ?? undefined};
     }
 `
 

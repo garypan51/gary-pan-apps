@@ -23,7 +23,7 @@ export const StyledHeader = styled.h1`
     margin:${(props: IProps) => props.margin ?? "0"};
     transition: 0.3s;
     :hover {
-        color: ${(props: IProps) => props.onHoverColor ?? props.theme?.textColor};
+        color: ${(props: IProps) => props.onHoverColor ?? undefined};
     }
 `
 
