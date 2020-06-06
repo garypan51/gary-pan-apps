@@ -22,8 +22,10 @@
       "aboutThisWebsite" : {
         "title": "About This App"
       },
-      "projects": {
-        "title": "Projects"
+      "work": {
+        "title": "Work",
+        "mobile": "Mobile",
+        "web": "Web"
       },
       "contact": {
         "title": "Contact"

@@ -6,7 +6,8 @@ import {ThemeProvider} from "styled-components";
 import {DarkTheme, LightTheme} from "../../resources/Theme";
 import {Column} from "../../components/flexbox/Column";
 import {Drawer} from "../../components/containers/Drawer";
-import {PagePicker} from "./PagePicker/PagePicker";
+import {ProjectPicker} from "../projects/components/projectPicker/ProjectPicker";
+import {NavigationBar} from "./NavigationBar";
 
 interface IProps {
     routes: ReactNode
@@ -25,6 +26,7 @@ export const App = (props: IProps) => {
                 position={"relative"}
                 width={"100%"}
                 height={"100vh"}>
+                <NavigationBar />
                 {/*<GPAAppBar title={""} onMenuClick={() => setDrawerOpen(true)}/>*/}
                 {props.routes}
                 <Drawer
@@ -34,7 +36,7 @@ export const App = (props: IProps) => {
                     anchor={"left"}
                     open={drawerOpen}
                     ModalProps={{onBackdropClick: () => setDrawerOpen(false)}}/>
-                <PagePicker theme={theme}/>
+                {/*<ProjectPicker theme={theme}/>*/}
             </Column>
         </ThemeProvider>
     )

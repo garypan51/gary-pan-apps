@@ -11,7 +11,6 @@ import {Header} from "../../../components/text/Header";
 import {Paragraph} from "../../../components/text/Paragraph";
 import {FloatingActionButton} from "../../../components/buttons/FloatingActionButton";
 import {Colors} from "../../../resources/Colors";
-import {ProjectPicker} from "../ProjectPicker";
 import AppsIcon from '@material-ui/icons/Apps';
 
 interface IProps {
@@ -41,7 +40,7 @@ export const ProjectDetail = (props: IProps) => {
     const [projectPickerOpen, setProjectPickerOpen] = useState(false)
 
     useEffect(() => {
-        dispatch(setAppBarTitle(t("projects.title")))
+        dispatch(setAppBarTitle(t("work.title")))
     }, [])
 
     useEffect(() => {
@@ -96,7 +95,7 @@ export const ProjectDetail = (props: IProps) => {
 
     return (
         <Column width={"100%"} height={"100%"} backgroundColor={props.backgroundColor ?? "darkBlue"}>
-            <Header margin={"0 16px"}>{t("projects.titlfdase")}</Header>
+            <Header margin={"0 16px"}>{t("work.title")}</Header>
             <Paragraph margin={"0 16px"}>Sed ut perspquatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</Paragraph>
             { !onMobile &&
                 <Column forwardRef={ref} overflow={"visible"}>
@@ -110,7 +109,6 @@ export const ProjectDetail = (props: IProps) => {
                     </animated.div>
                     <animated.div style={{...bottomProjectPickerProps, ...bottomProjectPickerBaseProps}}>
                         <Column backgroundColor={Colors.dark.primaryColorDarkGradStart}/>
-                        <ProjectPicker onProjectClick={() => setProjectPickerOpen(false)}/>
                     </animated.div>
                 </Column>
             }

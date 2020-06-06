@@ -1,71 +1,105 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {GPAPages} from "../../../routes";
+import {GPAPage} from "../../../../routes";
 import styled from "styled-components";
-import {Row} from "../../../components/flexbox/Row";
-import {PageItem} from "./PageItem";
-import {Theme} from "../../../resources/Theme";
-import {useWindowSize} from "../../../hooks/UseWindowSize";
+import {Row} from "../../../../components/flexbox/Row";
+import {Theme} from "../../../../resources/Theme";
+import {useWindowSize} from "../../../../hooks/UseWindowSize";
 import {animated, config, useSprings} from "react-spring";
-import {ElementUtils} from "../../../utils/ElementUtils";
+import {ElementUtils} from "../../../../utils/ElementUtils";
+import {t} from "../../../../strings/i18n";
+import { ProjectItem } from './ProjectItem';
 
 interface IProps {
     theme: Theme
-    onPageClick?: () => void
+    onProjectClick?: () => void
 }
 
 const StyledRow = styled(Row)`
     border-radius: 4px;
 `
 
+export const GPAPages: GPAPage[] = [
+    {
+        name: t("home.title"),
+        path: "/",
+        textColor: "#ffffff",
+        backgroundColor: "#0068D6"
+    },
+    {
+        name: t("about.title"),
+        path: "/about-me",
+        textColor: "#AA13C6",
+        backgroundColor: "#00003F"
+    },
+    {
+        name: t("work.title"),
+        path: "/projects",
+        textColor: "#ffffff",
+        backgroundColor: "#2e7d32",
+    },
+    {
+        name: t("contact.title"),
+        path: "/contact",
+        textColor: "#ffffff",
+        backgroundColor: "#4a148c"
+    },
+    {
+        name: t("aboutThisWebsite.title"),
+        path: "/about-this-website",
+        textColor: "#ffffff",
+        backgroundColor: "#0068D6"
+    }
+]
+
 const pages = [GPAPages[1], GPAPages[2], GPAPages[3], GPAPages[4]]
-const pageItemWidth = `${Math.floor((100 / pages.length) - 5)}vw`
+const projectItemWidth = `${Math.floor((100 / pages.length) - 5)}vw`
 const transform = (x: any, y: any, s: any) => `translateX(${x}px) translateY(${y}px) scale(${s})`
 
-export const PageContainer = (props: IProps) => {
+export const ProjectsContainer = (props: IProps) => {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-    const pageItemRefs = useRef([React.createRef(), React.createRef(), React.createRef(), React.createRef()]);
+    const projectItemRefs = useRef([React.createRef(), React.createRef(), React.createRef(), React.createRef()]);
     const size = useWindowSize()
     const [selected, setSelected] = useState(false)
 
-    const [pageItemProps, setPageItemProps] = useSprings(pages.length, () => ({
+    const [projectItemProps, setProjectItemProps] = useSprings(pages.length, () => ({
         config: config.default,
         transformXYScale: [0, 0, 1],
-        width: pageItemWidth,
+        width: projectItemWidth,
         height: "150px"
     }))
 
-    const selectedPageItemProps = (ref: any) => { return {
+    const selectedProjectItemProps = (ref: any) => { return {
         transformXYScale: [ElementUtils.getTranslateToMiddleX(size.width!, ref.current.getBoundingClientRect().x, ref.current.getBoundingClientRect().width / 2), -((size.height! - 174) / 2), 1]
     }}
 
-    const unselectedPageItemProps = (ref: any) => {return {
+    const unselectedProjectItemProps = (ref: any) => {return {
         transformXYScale: [ElementUtils.getTranslateToMiddleX(size.width!, ref.current.getBoundingClientRect().x, ref.current.getBoundingClientRect().width / 2), 0, 1]
     }}
 
     useEffect(() => {
         if (selectedIndex != null) {
             //@ts-ignore
-            setPageItemProps(index => index == selectedIndex ? selectedPageItemProps(pageItemRefs.current[index]) :  unselectedPageItemProps(pageItemRefs.current[index]))
+            setProjectItemProps(index => index == selectedIndex ? selectedProjectItemProps(projectItemRefs.current[index]) :  unselectedProjectItemProps(projectItemRefs.current[index]))
         }
     }, [selectedIndex])
 
-    const onPageClick = (index: number, ref: any) => {
+    const onProjectClick = (index: number, ref: any) => {
         setSelectedIndex(index)
         // props.onPageClick?.()
     }
 
-    const pageItems = pageItemProps.map((props, index) => {
+    const projectItems = projectItemProps.map((props, index) => {
         const unselected = selectedIndex != null && selectedIndex !== index
         return (
             <animated.div
                 //@ts-ignore
-                ref={pageItemRefs.current[index]}
+                ref={projectItemRefs.current[index]}
                 //@ts-ignore
                 style={{...{transform: props.transformXYScale.interpolate(transform)}, ...{cursor: "pointer", width: props.width, height: props.height}}}
-                onClick={() => onPageClick(index, pageItemRefs.current[index])}>
-                <PageItem
+                onClick={() => onProjectClick(index, projectItemRefs.current[index])}>
+                <ProjectItem
                     key={index}
-                    width={unselected ? pageItemWidth : pageItemWidth}
+                    width={unselected ? projectItemWidth : projectItemWidth}
                     height={"150px"}
                     name={pages[index].name}
                     expanded={unselected}
@@ -85,7 +119,7 @@ export const PageContainer = (props: IProps) => {
             margin={"0 16px"}
             justifyContent={"space-around"}
             alignItems={"center"}>
-            {pageItems}
+            {projectItems}
         </StyledRow>
     )
 }

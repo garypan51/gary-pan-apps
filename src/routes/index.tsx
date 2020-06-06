@@ -31,7 +31,7 @@ export const GPAPages: GPAPage[] = [
         backgroundColor: "#00003F"
     },
     {
-        name: t("projects.title"),
+        name: t("work.title"),
         path: "/projects",
         textColor: "#ffffff",
         backgroundColor: "#2e7d32",

@@ -1,7 +1,7 @@
 import React from "react";
 import {animated, config, useSpring} from "react-spring";
-import {Column} from "../../../components/flexbox/Column";
-import {Header} from "../../../components/text/Header";
+import {Column} from "../../../../components/flexbox/Column";
+import {Header} from "../../../../components/text/Header";
 import styled from "styled-components";
 
 interface IProps {
@@ -12,7 +12,7 @@ interface IProps {
     expanded: boolean
     backgroundColor: string
     textColor?: string
-    onPageClick?: () => void
+    onProjectClick?: () => void
 }
 
 const StyledColumn = styled(Column)`
@@ -21,20 +21,20 @@ const StyledColumn = styled(Column)`
 
 const scaleTransform = (s: any) => `scale(${s})`
 
-export const PageItem = (props: IProps) => {
-    const [pageItemProps, setPageItemProps] = useSpring(() => ({
+export const ProjectItem = (props: IProps) => {
+    const [projectItemProps, setProjectItemProps] = useSpring(() => ({
         config: config.default,
         scale: 1
     }))
 
     const scaleOnHover = (hover: boolean) => {
-        setPageItemProps({
+        setProjectItemProps({
             scale: hover ? 1.05 : 1
         })
     }
 
-    const pageItemStyle = {
-        transform: pageItemProps.scale.interpolate(scaleTransform),
+    const projectItemStyle = {
+        transform: projectItemProps.scale.interpolate(scaleTransform),
         height: props.height,
         backgroundColor: props.backgroundColor,
         borderRadius: 4
@@ -42,7 +42,7 @@ export const PageItem = (props: IProps) => {
 
     return (
         <animated.div
-            style={pageItemStyle}
+            style={projectItemStyle}
             onMouseEnter={() => scaleOnHover(true)}
             onMouseLeave={() => scaleOnHover(false)}>
             <StyledColumn backgroundColor={props.backgroundColor} padding={"16px 16px"}>
@@ -52,6 +52,6 @@ export const PageItem = (props: IProps) => {
     )
 }
 
-PageItem.defaultProps = {
+ProjectItem.defaultProps = {
     backgroundColor: "#ffffff"
 }

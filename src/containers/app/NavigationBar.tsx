@@ -7,6 +7,8 @@ import {useOnMobile} from "../../hooks/UseOnMobile";
 import {GPAPages} from "../../routes";
 import {ThemeContext} from "styled-components";
 import {Column} from "../../components/flexbox/Column";
+import {Paragraph} from "../../components/text/Paragraph";
+import {useHistory} from "react-router";
 
 interface NavigationLinkProps {
     title: string
@@ -15,17 +17,22 @@ interface NavigationLinkProps {
 }
 
 const NavigationLink = (props: NavigationLinkProps) => {
+    const history = useHistory()
     const theme = useContext(ThemeContext)
 
+    const onNavigationLinkClick = () => {
+        history.push(props.path)
+    }
+
     return (
-        <Column>
-            <Header
+        <Column onClick={onNavigationLinkClick}>
+            <Paragraph
                 onHoverColor={theme.accentColor}
                 fontSize={"15px"}
                 cursor={"pointer"}
-                margin={"12px 24px 0 0"}>
+                margin={"12px 48px 0 0"}>
                 {props.title}
-            </Header>
+            </Paragraph>
         </Column>
     )
 }
@@ -53,7 +60,7 @@ export const NavigationBar = (props: IProps) => {
         <Row
             width={"100vw"}
             justifyContent={"flex-end"}
-            padding={"0 2px 0 0"}>
+            padding={"10px 2px 0 0"}>
             {links}
         </Row>
     )
