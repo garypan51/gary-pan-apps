@@ -6,7 +6,6 @@ import {ThemeProvider} from "styled-components";
 import {DarkTheme, LightTheme} from "../../resources/Theme";
 import {Column} from "../../components/flexbox/Column";
 import {Drawer} from "../../components/containers/Drawer";
-import {ProjectPicker} from "../work/main/components/projectPicker/ProjectPicker";
 import {NavigationBar} from "./NavigationBar";
 
 interface IProps {
@@ -27,7 +26,6 @@ export const App = (props: IProps) => {
                 width={"100%"}
                 height={"100vh"}>
                 <NavigationBar />
-                {/*<GPAAppBar title={""} onMenuClick={() => setDrawerOpen(true)}/>*/}
                 {props.routes}
                 <Drawer
                     theme={theme}
@@ -36,7 +34,6 @@ export const App = (props: IProps) => {
                     anchor={"left"}
                     open={drawerOpen}
                     ModalProps={{onBackdropClick: () => setDrawerOpen(false)}}/>
-                {/*<ProjectPicker theme={theme}/>*/}
             </Column>
         </ThemeProvider>
     )
