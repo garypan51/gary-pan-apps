@@ -1,13 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {GPAPage} from "../../../../routes";
 import styled from "styled-components";
-import {Row} from "../../../../components/flexbox/Row";
-import {Theme} from "../../../../resources/Theme";
-import {useWindowSize} from "../../../../hooks/UseWindowSize";
+import {Row} from "../../../../../components/flexbox/Row";
+import {Theme} from "../../../../../resources/Theme";
+import {useWindowSize} from "../../../../../hooks/UseWindowSize";
 import {animated, config, useSprings} from "react-spring";
-import {ElementUtils} from "../../../../utils/ElementUtils";
-import {t} from "../../../../strings/i18n";
-import { ProjectItem } from './ProjectItem';
+import {ElementUtils} from "../../../../../utils/ElementUtils";
+import {t} from "../../../../../strings/i18n";
+import {GradientItem} from '../GradientItem';
 
 interface IProps {
     theme: Theme
@@ -18,41 +17,34 @@ const StyledRow = styled(Row)`
     border-radius: 4px;
 `
 
-export const GPAPages: GPAPage[] = [
+const projects = [
     {
-        name: t("home.title"),
+        name: t("B2C"),
         path: "/",
         textColor: "#ffffff",
-        backgroundColor: "#0068D6"
+        gradient: ["#32619A", "#488CDD"]
     },
     {
-        name: t("about.title"),
+        name: t("B2B"),
         path: "/about-me",
-        textColor: "#AA13C6",
-        backgroundColor: "#00003F"
+        textColor: "#ffffff",
+        gradient: ["#72627F", "#A791BA"]
     },
     {
         name: t("work.title"),
         path: "/projects",
         textColor: "#ffffff",
-        backgroundColor: "#2e7d32",
-    },
-    {
-        name: t("contact.title"),
-        path: "/contact",
-        textColor: "#ffffff",
-        backgroundColor: "#4a148c"
+        gradient: ["#61968D", "#9AEFE0"]
     },
     {
         name: t("aboutThisWebsite.title"),
         path: "/about-this-website",
         textColor: "#ffffff",
-        backgroundColor: "#0068D6"
+        gradient: ["#9C6316", "#F49B23"]
     }
 ]
 
-const pages = [GPAPages[1], GPAPages[2], GPAPages[3], GPAPages[4]]
-const projectItemWidth = `${Math.floor((100 / pages.length) - 5)}vw`
+const projectItemWidth = `${Math.floor((100 / projects.length) - 5)}vw`
 const transform = (x: any, y: any, s: any) => `translateX(${x}px) translateY(${y}px) scale(${s})`
 
 export const ProjectsContainer = (props: IProps) => {
@@ -61,7 +53,7 @@ export const ProjectsContainer = (props: IProps) => {
     const size = useWindowSize()
     const [selected, setSelected] = useState(false)
 
-    const [projectItemProps, setProjectItemProps] = useSprings(pages.length, () => ({
+    const [projectItemProps, setProjectItemProps] = useSprings(projects.length, () => ({
         config: config.default,
         transformXYScale: [0, 0, 1],
         width: projectItemWidth,
@@ -97,14 +89,14 @@ export const ProjectsContainer = (props: IProps) => {
                 //@ts-ignore
                 style={{...{transform: props.transformXYScale.interpolate(transform)}, ...{cursor: "pointer", width: props.width, height: props.height}}}
                 onClick={() => onProjectClick(index, projectItemRefs.current[index])}>
-                <ProjectItem
+                <GradientItem
                     key={index}
                     width={unselected ? projectItemWidth : projectItemWidth}
                     height={"150px"}
-                    name={pages[index].name}
+                    name={projects[index].name}
                     expanded={unselected}
-                    backgroundColor={pages[index].backgroundColor}
-                    textColor={pages[index].textColor}/>
+                    gradientColors={projects[index].gradient}
+                    textColor={projects[index].textColor}/>
             </animated.div>
         )
     })

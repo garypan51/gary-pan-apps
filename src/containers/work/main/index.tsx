@@ -1,11 +1,11 @@
 import React, {useContext, useEffect} from 'react'
-import {Column} from "../../components/flexbox/Column"
-import {Header} from "../../components/text/Header"
+import {Column} from "../../../components/flexbox/Column"
+import {Header} from "../../../components/text/Header"
 import {ThemeContext} from "styled-components";
-import {t} from "../../strings/i18n";
-import {Paragraph} from "../../components/text/Paragraph";
+import {t} from "../../../strings/i18n";
+import {Paragraph} from "../../../components/text/Paragraph";
 import {useDispatch} from "react-redux";
-import {setAppBarTitle} from "../../redux/actions/AppActions";
+import {setAppBarTitle} from "../../../redux/actions/AppActions";
 import {ProjectPicker} from "./components/projectPicker/ProjectPicker";
 
 export const Projects = () => {

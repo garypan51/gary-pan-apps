@@ -10,7 +10,7 @@ interface IProps {
     width: string
     height: string
     expanded: boolean
-    backgroundColor: string
+    gradientColors: string[]
     textColor?: string
     onProjectClick?: () => void
 }
@@ -20,8 +20,19 @@ const StyledColumn = styled(Column)`
 `
 
 const scaleTransform = (s: any) => `scale(${s})`
+const gradientBackground = (colors: string[]) => {
+    let gradient = ""
+    colors.forEach((color, index) => {
+        gradient += `${color.replace("\"", "")}`
+        if (index != colors.length - 1) {
+            gradient += ", "
+        }
+    })
+    console.log(`linear-gradient(${gradient})`)
+    return `linear-gradient(${gradient})`
+}
 
-export const ProjectItem = (props: IProps) => {
+export const GradientItem = (props: IProps) => {
     const [projectItemProps, setProjectItemProps] = useSpring(() => ({
         config: config.default,
         scale: 1
@@ -36,8 +47,8 @@ export const ProjectItem = (props: IProps) => {
     const projectItemStyle = {
         transform: projectItemProps.scale.interpolate(scaleTransform),
         height: props.height,
-        backgroundColor: props.backgroundColor,
-        borderRadius: 4
+        borderRadius: 4,
+        background: gradientBackground(props.gradientColors)
     }
 
     return (
@@ -45,13 +56,13 @@ export const ProjectItem = (props: IProps) => {
             style={projectItemStyle}
             onMouseEnter={() => scaleOnHover(true)}
             onMouseLeave={() => scaleOnHover(false)}>
-            <StyledColumn backgroundColor={props.backgroundColor} padding={"16px 16px"}>
+            <StyledColumn padding={"16px 16px"}>
                 <Header fontSize={"16px"} textColor={props.textColor}>{props.name}</Header>
             </StyledColumn>
         </animated.div>
     )
 }
 
-ProjectItem.defaultProps = {
+GradientItem.defaultProps = {
     backgroundColor: "#ffffff"
 }

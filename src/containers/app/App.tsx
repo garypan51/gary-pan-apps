@@ -6,7 +6,7 @@ import {ThemeProvider} from "styled-components";
 import {DarkTheme, LightTheme} from "../../resources/Theme";
 import {Column} from "../../components/flexbox/Column";
 import {Drawer} from "../../components/containers/Drawer";
-import {ProjectPicker} from "../projects/components/projectPicker/ProjectPicker";
+import {ProjectPicker} from "../work/main/components/projectPicker/ProjectPicker";
 import {NavigationBar} from "./NavigationBar";
 
 interface IProps {

@@ -2,12 +2,12 @@ import React from "react"
 import {Switch, Route} from "react-router-dom"
 import {Home} from "../containers/home"
 import {AboutMe} from "../containers/aboutMe"
-import {Projects} from "../containers/projects"
+import {Projects} from "../containers/work/main"
 import {Contact} from "../containers/contact"
 import {AboutThisWebsite} from "../containers/aboutThisWebsite"
 import {NotFound} from "../containers/notFound/NotFound"
 import {t} from "../strings/i18n"
-import {ProjectDetail} from "../containers/projects/detail/ProjectDetail";
+import {ProjectDetail} from "../containers/work/detail/ProjectDetail";
 import * as H from "history";
 
 export interface GPAPage {

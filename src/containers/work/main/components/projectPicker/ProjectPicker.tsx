@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {ProjectsContainer} from "./ProjectsContainer";
-import {Column} from "../../../../components/flexbox/Column";
+import {Column} from "../../../../../components/flexbox/Column";
 import {animated, config, useSpring} from "react-spring";
-import {FloatingActionButton} from "../../../../components/buttons/FloatingActionButton";
+import {FloatingActionButton} from "../../../../../components/buttons/FloatingActionButton";
 import AppsIcon from "@material-ui/icons/Apps";
-import {useOnMobile} from "../../../../hooks/UseOnMobile";
-import {useOnOutsideClick} from "../../../../hooks/UseOnOutsideClick";
-import {Theme} from "../../../../resources/Theme";
+import {useOnMobile} from "../../../../../hooks/UseOnMobile";
+import {useOnOutsideClick} from "../../../../../hooks/UseOnOutsideClick";
+import {Theme} from "../../../../../resources/Theme";
 
 interface IProps {
     theme: Theme
