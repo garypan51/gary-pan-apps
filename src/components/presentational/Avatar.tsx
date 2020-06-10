@@ -7,6 +7,7 @@ interface IProps {
     imgSrc?: string
     width: string
     height: string
+    margin?: string
     onClick?: () => void
 }
 
@@ -19,7 +20,11 @@ const BaseAvatar = (props: IProps) => {
     }))
 
     return (
-        <a style={{marginRight: 32}} href={props.href} target="_blank" rel="noopener noreferrer">
+        <a
+            href={props.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{margin: props.margin}}>
             <animated.img
                 style={{transform: avatarProps.scale.interpolate(scaleTransform)}}
                 width={props.width}

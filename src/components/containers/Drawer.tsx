@@ -13,11 +13,12 @@ import {Column} from "../flexbox/Column";
 import {Paragraph} from "../text/Paragraph";
 import {GPAPages} from "../../routes";
 import {DrawerItem} from "../presentational/DrawerItem";
-import {useLocation} from "react-router";
-import {useNavigate} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
+import * as H from "history";
 
 interface IProps extends DrawerProps {
     theme: Theme
+    location: H.Location
     backgroundColor?: string
     width?: string
     height?: string
@@ -48,16 +49,16 @@ const DrawerHeaderContainer = styled(Row)`
 `
 
 const StyledDrawerItem = styled(DrawerItem)`
+    margin-left: 4px;
     padding-left: 16px;
     margin-bottom: 4px;
     :hover {
     }
 `
 
-export const Drawer = ({theme, backgroundColor, width, height, onDismiss, ...rest }: IProps) => {
+export const Drawer = ({theme, location, backgroundColor, width, height, onDismiss, ...rest }: IProps) => {
     const dispatch = useDispatch()
-    const location = useLocation()
-    const navigate = useNavigate()
+    const history = useHistory()
     const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
     const lightIcon = darkModeEnabled ? <LightsOffIcon style={{fill: Colors.dark.textColor}}/> : <LightsOnIcon style={{fill: Colors.light.textColor}}/>
 
@@ -66,13 +67,13 @@ export const Drawer = ({theme, backgroundColor, width, height, onDismiss, ...res
     }
 
     const onDrawerItemClick = (path: string) => {
-        navigate(path)
+        history.push(path)
         onDismiss?.()
     }
 
     return (
         <StyledMaterialDrawer classes={{root: "drawer", paper: "paper"}} {...rest}>
-            <Column height={"100%"}>
+            <Column backgroundColor={theme.primaryColorDark} height={"100%"}>
                 <DrawerHeaderContainer width={"250px"} justifyContent={"space-between"} alignItems={"center"} padding={"0 16px"}>
                     <Paragraph>Quick Links</Paragraph>
                     <Tooltip title="Lights">
@@ -86,13 +87,14 @@ export const Drawer = ({theme, backgroundColor, width, height, onDismiss, ...res
                 </DrawerHeaderContainer>
                 {
                     GPAPages.map((page, index) =>
-                                <StyledDrawerItem
-                                    key={index}
-                                    onClick={() => onDrawerItemClick(page.path)}
-                                    className={"drawer-item"}
-                                    title={page.name}
-                                    selected={page.path === location.pathname}/>
-                                )
+                        <StyledDrawerItem
+                            key={index}
+                            onClick={() => onDrawerItemClick(page.path)}
+                            className={"drawer-item"}
+                            title={page.name}
+                            selected={page.path === location.pathname}
+                            selectedTextColor={theme.textColorAlt}/>
+                        )
                 }
             </Column>
         </StyledMaterialDrawer>

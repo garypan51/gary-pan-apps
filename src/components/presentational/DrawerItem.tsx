@@ -10,11 +10,13 @@ interface IProps {
     title?: string
     className?: string
     selected: boolean
+    selectedTextColor?: string
 }
 
 const StyledColumn = styled(Column)`
     background-color: ${(props: IProps) => props.selected ? props.theme.accentColor : undefined};
     border-radius: 4px;
+    text-color: red;
     cursor: pointer;
     padding: 0;
     :hover {
@@ -30,7 +32,7 @@ export const DrawerItem = (props: IProps) => {
             onClick={props.onClick}
             width={"100%"}
             selected={props.selected}>
-            <Paragraph>{props.title}</Paragraph>
+            <Paragraph textColor={props.selected ? props.selectedTextColor : undefined}>{props.title}</Paragraph>
         </StyledColumn>
     )
 }

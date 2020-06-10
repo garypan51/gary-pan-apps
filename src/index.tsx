@@ -3,20 +3,24 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import {App} from './containers/app/App'
 import * as serviceWorker from './serviceWorker'
-import {createRoutes} from "./routes"
 import {Provider} from "react-redux";
 import store from "./redux/store";
+import {BrowserRouter} from "react-router-dom";
+import {createRoutes} from "./routes";
 
 const render = () => {
     const routes = createRoutes()
-        ReactDOM.render(
-            <React.StrictMode>
+
+    ReactDOM.render(
+        <React.StrictMode>
+            <BrowserRouter>
                 <Provider store={store}>
-                    <App routes={routes} />
+                    <App routes={routes}/>
                 </Provider>
-            </React.StrictMode>,
-            document.getElementById('root')
-        )
+            </BrowserRouter>
+        </React.StrictMode>,
+        document.getElementById('root')
+    )
 }
 
 

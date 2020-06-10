@@ -1,65 +1,39 @@
-import React, {ReactNode, useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React, {ReactNode, useState} from 'react';
+import {useSelector} from "react-redux";
 import {StoreState} from "../../redux/store"
-import {BrowserRouter} from "react-router-dom";
-import {GPAAppBar} from "./GPAAppBar";
+import {useLocation} from "react-router-dom";
 import {ThemeProvider} from "styled-components";
 import {DarkTheme, LightTheme} from "../../resources/Theme";
 import {Column} from "../../components/flexbox/Column";
-import {setShowAppBar} from "../../redux/actions/AppActions";
-import {useSpring} from "react-spring";
 import {Drawer} from "../../components/containers/Drawer";
-import {t} from "../../strings/i18n";
-import {useOnMobile} from "../../hooks/UseOnMobile";
-
-const SHOW_SOURCE_CODE_LINK_DELAY = 1000
+import {NavigationBar} from "./NavigationBar";
 
 interface IProps {
-    routes?: ReactNode
+    routes: ReactNode
 }
 
 export const App = (props: IProps) => {
-    const dispatch = useDispatch()
+    const location = useLocation()
     const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
-    const showAppBar = useSelector((state: StoreState) => state.app.showAppBar)
-    const [appBarTitle, setAppBarTitle] = useState(t("app.name"))
-    const [drawerOpen, setDrawerOpen] = useState(false)
-    const onMobile = useOnMobile()
-
-    const appBarProps = useSpring({
-        config: { mass: 100, clamp: true },
-        opacity: 1,
-        from: {opacity: 0}
-    })
     const theme = darkModeEnabled ? DarkTheme : LightTheme
-
-    useEffect(() => {
-        const showSourceCodeTimeout = setTimeout(() => {
-            dispatch(setShowAppBar(true))
-        }, SHOW_SOURCE_CODE_LINK_DELAY)
-        return () => { clearTimeout(showSourceCodeTimeout) }
-    }, [dispatch])
-
-    useEffect(() => {
-        setAppBarTitle(onMobile ? t("app.shortName") : t("app.name"))
-    }, [onMobile])
+    const [drawerOpen, setDrawerOpen] = useState(false)
 
     return (
         <ThemeProvider theme={theme}>
             <Column
+                backgroundColor={theme.primaryColor}
                 position={"relative"}
                 width={"100%"}
-                height={"100%"}>
-                <BrowserRouter>
-                    <GPAAppBar title={appBarTitle} onMenuClick={() => setDrawerOpen(true)}/>
-                    {props.routes}
-                    <Drawer
-                        theme={theme}
-                        onDismiss={() => setDrawerOpen(false)}
-                        anchor={"left"}
-                        open={drawerOpen}
-                        ModalProps={{onBackdropClick: () => setDrawerOpen(false)}}/>
-                </BrowserRouter>
+                height={"100vh"}>
+                <NavigationBar />
+                {props.routes}
+                <Drawer
+                    theme={theme}
+                    location={location}
+                    onDismiss={() => setDrawerOpen(false)}
+                    anchor={"left"}
+                    open={drawerOpen}
+                    ModalProps={{onBackdropClick: () => setDrawerOpen(false)}}/>
             </Column>
         </ThemeProvider>
     )

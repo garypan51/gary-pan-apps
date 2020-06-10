@@ -56,17 +56,14 @@ export const SourceCodeLink = (props: IProps) => {
                 onMouseEnter={() => setContentText(t("app.sourceCodeTitle"))}
                 onMouseLeave={() => setContentText(t("app.sourceCodeTitle"))}>
                 <Row
-                    transparent
                     alignItems={"flex-start"}>
                     <Column
-                        transparent
                         width={"200px"}>
                         <Link href={Links.sourceCode} target="_blank" rel="noopener noreferrer">
                             <Paragraph fontSize={"12px"}>{contentText}</Paragraph>
                         </Link>
                     </Column>
                     <Column
-                        transparent
                         padding={"10px 4px"}>
                         <button onClick={props.onDismiss}>Dismiss</button>
                     </Column>

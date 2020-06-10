@@ -5,7 +5,7 @@ import {Theme} from "../../resources/Theme";
 
 interface IProps extends PaperProps {
     theme: Theme
-    backgroundColor?: string
+    backgroundColor: string
     width?: string
     height?: string
     cursor?: string
@@ -17,15 +17,21 @@ const StyledMaterialPaper = styled(MaterialPaper)`
         width: ${(props: IProps) => props.width ?? "auto"};
         height: ${(props: IProps) => props.height ?? "auto"};
         cursor: ${(props: IProps) => props.cursor ?? undefined};
+        overflow: hidden;
     };
 `
 
-export const BasePaper = (props: IProps) => {
+export const BasePaper = ({theme, backgroundColor, width, height, cursor, ...rest}: IProps) => {
     return (
         <StyledMaterialPaper
             classes={{root: "paper"}}
             variant={"elevation"}
-            {...props}>
+            theme={theme}
+            backgroundColor={backgroundColor}
+            width={width}
+            height={height}
+            cursor={cursor}
+            {...rest}>
         </StyledMaterialPaper>
     )
 }

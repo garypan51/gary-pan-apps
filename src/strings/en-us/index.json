@@ -20,13 +20,15 @@
         "title": "About"
       },
       "aboutThisWebsite" : {
-        "title": "About This Website"
+        "title": "About This App"
       },
-      "projects": {
-        "title": "Projects"
+      "work": {
+        "title": "Work",
+        "mobile": "Mobile",
+        "web": "Web"
       },
       "contact": {
-        "title": "Contact Me"
+        "title": "Contact"
       },
       "notFound": {
         "title": "404 Not Found :("
