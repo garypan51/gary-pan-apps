@@ -19,6 +19,7 @@ export const StyledHeader = styled.h1`
     color: ${(props: IProps) => props.textColor ?? props.theme?.textColor};
     text-align: ${(props: IProps) => props.textAlign ?? undefined};
     padding: 0;
+    font-weight: 700;
     cursor: ${(props: IProps) => props.cursor ?? undefined};
     margin:${(props: IProps) => props.margin ?? "0"};
     transition: 0.3s;

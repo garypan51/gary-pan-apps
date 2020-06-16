@@ -31,13 +31,13 @@ const projects = [
         gradient: ["#72627F", "#A791BA"]
     },
     {
-        name: t("work.title"),
+        name: t("Personal"),
         path: "/projects",
         textColor: "#ffffff",
         gradient: ["#61968D", "#9AEFE0"]
     },
     {
-        name: t("aboutThisWebsite.title"),
+        name: t("For Fun"),
         path: "/about-this-website",
         textColor: "#ffffff",
         gradient: ["#9C6316", "#F49B23"]
@@ -55,17 +55,22 @@ export const ProjectsContainer = (props: IProps) => {
 
     const [projectItemProps, setProjectItemProps] = useSprings(projects.length, () => ({
         config: config.default,
+        backgroundColor: "#ffffff",
         transformXYScale: [0, 0, 1],
         width: projectItemWidth,
         height: "150px"
     }))
 
     const selectedProjectItemProps = (ref: any) => { return {
-        transformXYScale: [ElementUtils.getTranslateToMiddleX(size.width!, ref.current.getBoundingClientRect().x, ref.current.getBoundingClientRect().width / 2), -((size.height! - 174) / 2), 1]
+        transformXYScale: [ElementUtils.getTranslateToMiddleX(size.width!, ref.current.getBoundingClientRect().x, ref.current.getBoundingClientRect().width / 2), -((size.height! - 250) / 2), 1],
+        height: "800px",
+        width: "1000px"
     }}
 
     const unselectedProjectItemProps = (ref: any) => {return {
-        transformXYScale: [ElementUtils.getTranslateToMiddleX(size.width!, ref.current.getBoundingClientRect().x, ref.current.getBoundingClientRect().width / 2), 0, 1]
+        transformXYScale: [ElementUtils.getTranslateToMiddleX(size.width!, ref.current.getBoundingClientRect().x, ref.current.getBoundingClientRect().width / 2), 0, 1],
+        height: "150px",
+        width: projectItemWidth
     }}
 
     useEffect(() => {
@@ -80,14 +85,15 @@ export const ProjectsContainer = (props: IProps) => {
         // props.onPageClick?.()
     }
 
-    const projectItems = projectItemProps.map((props, index) => {
+    const projectItems = projectItemProps.map((projectItemProp, index) => {
         const unselected = selectedIndex != null && selectedIndex !== index
         return (
             <animated.div
                 //@ts-ignore
                 ref={projectItemRefs.current[index]}
                 //@ts-ignore
-                style={{...{transform: props.transformXYScale.interpolate(transform)}, ...{cursor: "pointer", width: props.width, height: props.height}}}
+                style={{...{transform: projectItemProp.transformXYScale.interpolate(transform)},
+                    ...{cursor: "pointer", width: projectItemProp.width, height: projectItemProp.height, backgroundColor: projectItemProp.backgroundColor}}}
                 onClick={() => onProjectClick(index, projectItemRefs.current[index])}>
                 <GradientItem
                     key={index}

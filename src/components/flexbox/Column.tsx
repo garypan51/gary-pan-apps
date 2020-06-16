@@ -20,7 +20,7 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const StyledColumn = styled.div`
     box-sizing: border-box;
-    overflow: ${(props: IProps) => props.overflow ?? "hidden"};
+    overflow: ${(props: IProps) => props.overflow ?? undefined};
     position: ${(props: IProps) => props.position ?? undefined};
     display: flex;
     flex: ${(props: IProps) => props.flex ?? undefined};
