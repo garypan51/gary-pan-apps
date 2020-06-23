@@ -7,7 +7,7 @@ import {useWindowSize} from "../../../../../hooks/UseWindowSize";
 import {animated, config, useSprings} from "react-spring";
 import {ElementUtils} from "../../../../../utils/ElementUtils";
 import {t} from "../../../../../strings/i18n";
-import { GradientItem } from '../GradientItem';
+import { GradientButton } from '../../../../../components/buttons/GradientButton';
 
 interface IProps {
     theme: Theme
@@ -94,11 +94,11 @@ export const ExperienceContainer = (props: IProps) => {
                 //@ts-ignore
                 style={{...{transform: props.transformXYScale.interpolate(transform)}, ...{cursor: "pointer", width: props.width, height: props.height}}}
                 onClick={() => onExperienceClick(index, experienceItemRefs.current[index])}>
-                <GradientItem
+                <GradientButton
                     key={index}
                     width={unselected ? experienceItemWidth(mobileItems.length) : experienceItemWidth(mobileItems.length)}
                     height={"150px"}
-                    name={mobileItems[index].name}
+                    text={mobileItems[index].name}
                     expanded={unselected}
                     gradientColors={mobileItems[index].gradient}
                     textColor={mobileItems[index].textColor}/>

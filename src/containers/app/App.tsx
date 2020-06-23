@@ -6,7 +6,6 @@ import {ThemeProvider} from "styled-components";
 import {DarkTheme, LightTheme} from "../../resources/Theme";
 import {Column} from "../../components/flexbox/Column";
 import {Drawer} from "../../components/containers/Drawer";
-import {NavigationBar} from "./NavigationBar";
 
 interface IProps {
     routes: ReactNode
@@ -25,7 +24,6 @@ export const App = (props: IProps) => {
                 position={"relative"}
                 width={"100%"}
                 height={"100vh"}>
-                <NavigationBar />
                 {props.routes}
                 <Drawer
                     theme={theme}

@@ -1,18 +1,19 @@
 import React from "react";
 import {animated, config, useSpring} from "react-spring";
-import {Column} from "../../../../components/flexbox/Column";
-import {Header} from "../../../../components/text/Header";
+import {Column} from "../flexbox/Column";
+import {Header} from "../text/Header";
 import styled from "styled-components";
 
 interface IProps {
-    key: number
-    name: string
+    key?: number
+    text: string
     width: string
     height: string
-    expanded: boolean
+    expanded?: boolean
     gradientColors: string[]
     textColor?: string
-    onProjectClick?: () => void
+    onClick?: () => void
+    imgSrc?: string
 }
 
 const StyledColumn = styled(Column)`
@@ -28,11 +29,10 @@ const gradientBackground = (colors: string[]) => {
             gradient += ", "
         }
     })
-    console.log(`linear-gradient(${gradient})`)
     return `linear-gradient(${gradient})`
 }
 
-export const GradientItem = (props: IProps) => {
+export const GradientButton = (props: IProps) => {
     const [projectItemProps, setProjectItemProps] = useSpring(() => ({
         config: config.default,
         scale: 1
@@ -46,6 +46,7 @@ export const GradientItem = (props: IProps) => {
 
     const projectItemStyle = {
         transform: projectItemProps.scale.interpolate(scaleTransform),
+        width: props.width,
         height: props.height,
         borderRadius: 4,
         background: gradientBackground(props.gradientColors)
@@ -54,15 +55,19 @@ export const GradientItem = (props: IProps) => {
     return (
         <animated.div
             style={projectItemStyle}
+            onClick={props.onClick}
             onMouseEnter={() => scaleOnHover(true)}
             onMouseLeave={() => scaleOnHover(false)}>
-            <StyledColumn padding={"16px 16px"}>
-                <Header fontSize={"16px"} textColor={props.textColor}>{props.name}</Header>
+            <StyledColumn height={"100%"} justifyContent={"space-between"} padding={"16px 16px"}>
+                <Header fontSize={"24px"} textColor={props.textColor}>{props.text}</Header>
+                <Column width={"100%"} alignItems={"flex-end"}>
+                    <img src={props.imgSrc}/>
+                </Column>
             </StyledColumn>
         </animated.div>
     )
 }
 
-GradientItem.defaultProps = {
+GradientButton.defaultProps = {
     backgroundColor: "#ffffff"
 }

@@ -1,14 +1,13 @@
 import React, {useContext} from "react"
-import {Header} from "../../components/text/Header"
-import {Row} from "../../components/flexbox/Row";
+import {Row} from "../flexbox/Row";
 import {useSelector} from "react-redux";
 import {StoreState} from "../../redux/store";
 import {useOnMobile} from "../../hooks/UseOnMobile";
 import {GPAPages} from "../../routes";
 import {ThemeContext} from "styled-components";
-import {Column} from "../../components/flexbox/Column";
-import {Paragraph} from "../../components/text/Paragraph";
-import {useHistory} from "react-router";
+import {Column} from "../flexbox/Column";
+import {Paragraph} from "../text/Paragraph";
+import {useNavigate} from "react-router";
 
 interface NavigationLinkProps {
     title: string
@@ -17,11 +16,11 @@ interface NavigationLinkProps {
 }
 
 const NavigationLink = (props: NavigationLinkProps) => {
-    const history = useHistory()
+    const navigate = useNavigate()
     const theme = useContext(ThemeContext)
 
     const onNavigationLinkClick = () => {
-        history.push(props.path)
+        navigate(props.path)
     }
 
     return (

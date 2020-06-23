@@ -1,38 +1,59 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Column} from "../../components/flexbox/Column";
-import {t} from "../../strings/i18n";
-import {setAppBarTitle} from "../../redux/actions/AppActions";
-import {useDispatch} from "react-redux";
-import {useOnMobile} from "../../hooks/UseOnMobile";
-import {Header} from "../../components/text/Header";
-import {animated, useSpring, config} from "react-spring";
+import {HeroSection} from "./HeroSection";
+import mobile from "../../resources/images/mobile.svg"
+import web from "../../resources/images/web.svg"
+import styled from "styled-components";
+import {Colors} from "../../resources/Colors";
+import {useWindowSize} from "../../hooks/UseWindowSize";
+
+const StyledContainer = styled(Column)`
+`
+
+const MobileImageContainer = styled(Column)`
+    position: absolute;
+    top: 45%;
+    left: 5%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+`
+
+const HeroContainer = styled(Column)`
+    z-Index:1
+`
+
+const WebImageContainer = styled(Column)`
+    position: absolute;
+    top: 50%;
+    left: 85%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+`
 
 export const Home = () => {
-    const dispatch = useDispatch()
-    const onMobile = useOnMobile()
+    const windowSize = useWindowSize()
 
-    const headerProps = useSpring({
-        config: config.molasses,
-        from: {opacity: 0},
-        to:  {opacity: 1}
-    })
-
-    useEffect(() => {
-        dispatch(setAppBarTitle(onMobile ? t("app.shortName") : t("app.name")))
-    }, [onMobile])
+    const heroSectionTopMargin = (windowSize.height ?? 0) * 0.1
 
     return (
-        <Column
-            width={"100%"}
-            padding={"16px 26px 0 26px"}>
-            <animated.div style={headerProps} >
-                <Header textAlign={"flex-start"} fontSize={"50px"}>Hello, I'm a frontend developer.</Header>
-            </animated.div>
-            {/*<Paragraph margin={"0 8px"}>I also like animations :)</Paragraph>*/}
-            {/*<animated.div style={pageItemProps}>*/}
-            {/*    <PageItem2/>*/}
-            {/*</animated.div>*/}
-        </Column>
+        <StyledContainer
+            width={"100vw"}
+            height={"100vh"}>
+            <MobileImageContainer>
+                <img src={mobile}/>
+            </MobileImageContainer>
+            <HeroContainer
+                backgroundColor={Colors.clearColor}
+                width={"100vw"}
+                height={"100vh"}
+                alignItems={"center"}
+                margin={`${heroSectionTopMargin}px 0 0 0`}>
+                <HeroSection className={"HeroSection"}/>
+            </HeroContainer>
+            <WebImageContainer>
+                <img src={web}/>
+            </WebImageContainer>
+        </StyledContainer>
     )
 }
 

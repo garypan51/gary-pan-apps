@@ -16,6 +16,7 @@ interface IProps {
 export const StyledHeader = styled.h1`
     font-family: Muli, sans-serif;
     font-size: ${(props: IProps) => props.fontSize ?? "30px"};
+    font-weight: 700;
     color: ${(props: IProps) => props.textColor ?? props.theme?.textColor};
     text-align: ${(props: IProps) => props.textAlign ?? undefined};
     padding: 0;

@@ -13,7 +13,7 @@ import {Column} from "../flexbox/Column";
 import {Paragraph} from "../text/Paragraph";
 import {GPAPages} from "../../routes";
 import {DrawerItem} from "../presentational/DrawerItem";
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import * as H from "history";
 
 interface IProps extends DrawerProps {
@@ -58,7 +58,7 @@ const StyledDrawerItem = styled(DrawerItem)`
 
 export const Drawer = ({theme, location, backgroundColor, width, height, onDismiss, ...rest }: IProps) => {
     const dispatch = useDispatch()
-    const history = useHistory()
+    const navigate = useNavigate()
     const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
     const lightIcon = darkModeEnabled ? <LightsOffIcon style={{fill: Colors.dark.textColor}}/> : <LightsOnIcon style={{fill: Colors.light.textColor}}/>
 
@@ -67,7 +67,7 @@ export const Drawer = ({theme, location, backgroundColor, width, height, onDismi
     }
 
     const onDrawerItemClick = (path: string) => {
-        history.push(path)
+        navigate(path)
         onDismiss?.()
     }
 
