@@ -3,6 +3,7 @@ import {animated, config, useSpring} from "react-spring";
 import {Column} from "../flexbox/Column";
 import {Header} from "../text/Header";
 import styled from "styled-components";
+import {Image} from "../presentational/Image";
 
 interface IProps {
     key?: number
@@ -49,6 +50,7 @@ export const GradientButton = (props: IProps) => {
         width: props.width,
         height: props.height,
         borderRadius: 4,
+        cursor: "pointer",
         background: gradientBackground(props.gradientColors)
     }
 
@@ -61,7 +63,7 @@ export const GradientButton = (props: IProps) => {
             <StyledColumn height={"100%"} justifyContent={"space-between"} padding={"16px 16px"}>
                 <Header fontSize={"24px"} textColor={props.textColor}>{props.text}</Header>
                 <Column width={"100%"} alignItems={"flex-end"}>
-                    <img src={props.imgSrc}/>
+                    <Image src={props.imgSrc} opacity={0.75}/>
                 </Column>
             </StyledColumn>
         </animated.div>

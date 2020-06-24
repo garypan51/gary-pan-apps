@@ -1,18 +1,27 @@
 import React from 'react';
 import {Column} from "../../components/flexbox/Column";
 import {HeroSection} from "./HeroSection";
-import mobile from "../../resources/images/mobile.svg"
-import web from "../../resources/images/web.svg"
+import sun from "../../resources/images/home/sun-logo.svg"
+import mobile from "../../resources/images/home/mobile-watermark.svg"
+import web from "../../resources/images/home/web-watermark.svg"
 import styled from "styled-components";
 import {Colors} from "../../resources/Colors";
 import {useWindowSize} from "../../hooks/UseWindowSize";
+import {IconButton, Tooltip} from "@material-ui/core";
+import {Image} from "../../components/presentational/Image";
+import {useDispatch, useSelector} from "react-redux";
+import {StoreState} from "../../redux/store";
+import {setDarkMode} from "../../redux/actions/AppActions";
 
-const StyledContainer = styled(Column)`
+const ThemeSwitcherContainer = styled(Column)`
 `
 
+const StyledImage = styled.img`
+    background-color: ${Colors.clearColor}
+`
 const MobileImageContainer = styled(Column)`
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 5%;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
@@ -24,36 +33,58 @@ const HeroContainer = styled(Column)`
 
 const WebImageContainer = styled(Column)`
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 85%;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
 `
 
+const StyledIconButton = styled(IconButton)`
+    &.iconButton {
+     :hover {
+          background-color: ${props => props.theme.rippleColor};
+        }
+    }
+`
+
 export const Home = () => {
     const windowSize = useWindowSize()
+    const dispatch = useDispatch()
+    const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
 
-    const heroSectionTopMargin = (windowSize.height ?? 0) * 0.1
+    const toggleDarkMode = () => {
+        dispatch(setDarkMode(!darkModeEnabled))
+    }
+    const heroSectionTopMargin = (windowSize.height ?? 0) * 0.05
 
     return (
-        <StyledContainer
+        <Column
             width={"100vw"}
             height={"100vh"}>
+            <ThemeSwitcherContainer padding={"16px"}>
+                <Tooltip title="Too Dark?">
+                    <StyledIconButton
+                        classes={{root: "iconButton"}}
+                        onClick={toggleDarkMode}>
+                        <Image src={sun}/>
+                    </StyledIconButton>
+                </Tooltip>
+            </ThemeSwitcherContainer>
             <MobileImageContainer>
-                <img src={mobile}/>
+                <Image src={mobile} opacity={darkModeEnabled ? 0.15 : 0.5}/>
             </MobileImageContainer>
             <HeroContainer
                 backgroundColor={Colors.clearColor}
                 width={"100vw"}
                 height={"100vh"}
                 alignItems={"center"}
-                margin={`${heroSectionTopMargin}px 0 0 0`}>
+                padding={`${heroSectionTopMargin}px 0 0 0`}>
                 <HeroSection className={"HeroSection"}/>
             </HeroContainer>
             <WebImageContainer>
-                <img src={web}/>
+                <Image src={web} opacity={darkModeEnabled ? 0.15 : 0.5}/>
             </WebImageContainer>
-        </StyledContainer>
+        </Column>
     )
 }
 

@@ -16,7 +16,7 @@ const StyledMaterialPaper = styled(MaterialPaper)`
         background-color: ${(props: IProps) => props.backgroundColor ?? props.theme.secondaryColor};
         width: ${(props: IProps) => props.width ?? "auto"};
         height: ${(props: IProps) => props.height ?? "auto"};
-        cursor: ${(props: IProps) => props.cursor ?? undefined};
+        cursor: ${(props: IProps) => props.cursor};
         overflow: hidden;
     };
 `

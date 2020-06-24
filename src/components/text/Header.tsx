@@ -18,13 +18,13 @@ export const StyledHeader = styled.h1`
     font-size: ${(props: IProps) => props.fontSize ?? "30px"};
     font-weight: 700;
     color: ${(props: IProps) => props.textColor ?? props.theme?.textColor};
-    text-align: ${(props: IProps) => props.textAlign ?? undefined};
+    text-align: ${(props: IProps) => props.textAlign};
     padding: 0;
-    cursor: ${(props: IProps) => props.cursor ?? undefined};
+    cursor: ${(props: IProps) => props.cursor};
     margin:${(props: IProps) => props.margin ?? "0"};
     transition: 0.3s;
     :hover {
-        color: ${(props: IProps) => props.onHoverColor ?? undefined};
+        color: ${(props: IProps) => props.onHoverColor};
     }
 `
 

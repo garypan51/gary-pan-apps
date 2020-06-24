@@ -18,12 +18,12 @@ const StyledParagraph = styled.p`
     font-weight: 300;
     font-size:${(props: IProps) => props.fontSize ?? "14px"};
     color:${(props: IProps) => props.textColor ?? props.theme?.textColor};
-    text-align: ${(props: IProps) => props.textAlign ?? undefined};
+    text-align: ${(props: IProps) => props.textAlign};
     padding: 0;
     margin:${(props: IProps) => props.margin ?? "0"};
-    cursor: ${(props: IProps) => props.cursor ?? undefined};
+    cursor: ${(props: IProps) => props.cursor};
     :hover {
-        color: ${(props: IProps) => props.onHoverColor ?? undefined};
+        color: ${(props: IProps) => props.onHoverColor};
     }
 `
 

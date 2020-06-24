@@ -1,10 +1,10 @@
 import React from 'react';
 import {Row} from "../../components/flexbox/Row";
 import {GradientButton} from "../../components/buttons/GradientButton";
-import about from "../../resources/images/about-profile-logo.svg"
-import work from "../../resources/images/work-logo.svg"
-import contact from "../../resources/images/contact-logo.svg"
-import {useNavigate} from "react-router";
+import about from "../../resources/images/home/about-me-logo.svg"
+import work from "../../resources/images/home/work-logo.svg"
+import contact from "../../resources/images/home/contact-logo.svg"
+import {useNavigate} from "react-router"
 
 interface IProps {
 }
