@@ -5,11 +5,11 @@ import {Header} from "../text/Header";
 import styled from "styled-components";
 import {Image} from "../presentational/Image";
 
-interface IProps {
+export interface GradientButtonProps {
     key?: number
     text: string
-    width: string
-    height: string
+    width?: string
+    height?: string
     expanded?: boolean
     gradientColors: string[]
     textColor?: string
@@ -18,7 +18,6 @@ interface IProps {
 }
 
 const StyledColumn = styled(Column)`
-    border-radius: 20px;
 `
 
 const scaleTransform = (s: any) => `scale(${s})`
@@ -33,7 +32,7 @@ const gradientBackground = (colors: string[]) => {
     return `linear-gradient(${gradient})`
 }
 
-export const GradientButton = (props: IProps) => {
+export const GradientButton = (props: GradientButtonProps) => {
     const [projectItemProps, setProjectItemProps] = useSpring(() => ({
         config: config.default,
         scale: 1
@@ -41,7 +40,7 @@ export const GradientButton = (props: IProps) => {
 
     const scaleOnHover = (hover: boolean) => {
         setProjectItemProps({
-            scale: hover ? 1.05 : 1
+            scale: hover ? 1.02 : 1
         })
     }
 
@@ -49,7 +48,7 @@ export const GradientButton = (props: IProps) => {
         transform: projectItemProps.scale.interpolate(scaleTransform),
         width: props.width,
         height: props.height,
-        borderRadius: 4,
+        borderRadius: 10,
         cursor: "pointer",
         background: gradientBackground(props.gradientColors)
     }

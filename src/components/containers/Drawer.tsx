@@ -26,20 +26,13 @@ interface IProps extends DrawerProps {
 }
 
 const StyledMaterialDrawer = styled(MaterialDrawer)`
-    &.drawer {
-        background-color: ${Colors.clearColor};
-        width: 250px;
-    };
-    &.paper {
-        color: ${Colors.clearColor};
-    };
 `
 
 const StyledIconButton = styled(IconButton)`
     &.iconButton {
      :hover {
           background-color: ${props => props.theme.rippleColor};
-        }
+     }
     }
 `
 
@@ -73,8 +66,8 @@ export const Drawer = ({theme, location, backgroundColor, width, height, onDismi
 
     return (
         <StyledMaterialDrawer classes={{root: "drawer", paper: "paper"}} {...rest}>
-            <Column backgroundColor={theme.primaryColorDark} height={"100%"}>
-                <DrawerHeaderContainer width={"250px"} justifyContent={"space-between"} alignItems={"center"} padding={"0 16px"}>
+            <Column backgroundColor={theme.primaryColorDark} height={"100%"} width={"50vw"} padding={"0 4px"}>
+                <DrawerHeaderContainer width={"50vw"} justifyContent={"space-between"} alignItems={"center"} padding={"0 16px"}>
                     <Paragraph>Quick Links</Paragraph>
                     <Tooltip title="Lights">
                         <StyledIconButton

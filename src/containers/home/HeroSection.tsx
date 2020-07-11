@@ -1,31 +1,21 @@
 import React from 'react';
-import {Column} from "../../components/flexbox/Column";
 import {Paragraph} from "../../components/text/Paragraph";
 import {Header} from "../../components/text/Header";
-import {HomeNavigationButtons} from "./HomeNavigationButtons";
 import styled from "styled-components";
+import {useOnMobile} from "../../hooks/UseOnMobile";
+import {WebMobileProps} from "../../props/CommonProps";
 
-interface IProps {
-    className?: string
-}
-
-const HomeNavigationButtonsContainer = styled(Column)`
-    margin: 50px 0 0 0;
+const HeroTextSection = styled.div`
+    max-width: ${(props: WebMobileProps) => props.onMobile ? undefined : "580px"};
 `
 
-export const HeroSection = (props: IProps) => {
+export const HeroSection = () => {
+    const onMobile = useOnMobile()
+
     return (
-        <Column alignItems={"center"}>
-            <Column
-                width={"580px"}
-                alignItems={"flex-start"}>
-                <Header fontSize={"50px"}>Let’s craft apps that people love to use</Header>
-                <Paragraph margin={"36px 0 0 0"} fontSize={"30px"}>Driven by design and hungry for Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet?</Paragraph>
-            </Column>
-            <HomeNavigationButtonsContainer>
-                <HomeNavigationButtons/>
-            </HomeNavigationButtonsContainer>
-        </Column>
+        <HeroTextSection onMobile={onMobile}>
+            <Header fontSize={onMobile ? "2rem" : "3rem"}>Et harum quidem rerum facilis est et expedita.</Header>
+            <Paragraph margin={"2rem 0 0 0"} fontSize={onMobile ? "1rem" : "2rem"}>Neque porro quisquam est, qu sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet?</Paragraph>
+        </HeroTextSection>
     )
 }
-
