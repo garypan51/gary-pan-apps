@@ -21,9 +21,9 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
 const StyledRow = styled.div`
     box-sizing: border-box;
     overflow: ${(props: IProps) => props.overflow ?? "hidden"};
-    position: ${(props: IProps) => props.position ?? undefined};
+    position: ${(props: IProps) => props.position};
     display: flex;
-    flex: ${(props: IProps) => props.flex ?? undefined};
+    flex: ${(props: IProps) => props.flex};
     flex-direction: row;
     justify-content: ${(props: IProps) => props.justifyContent ?? "flex-start"};
     align-items: ${(props: IProps) => props.alignItems ?? "flex-start"};

@@ -6,7 +6,8 @@ import {ThemeProvider} from "styled-components";
 import {DarkTheme, LightTheme} from "../../resources/Theme";
 import {Column} from "../../components/flexbox/Column";
 import {Drawer} from "../../components/containers/Drawer";
-import {NavigationBar} from "./NavigationBar";
+import {GPAAppBar} from "./GPAAppBar";
+import {useOnMobile} from "../../hooks/UseOnMobile";
 
 interface IProps {
     routes: ReactNode
@@ -14,6 +15,7 @@ interface IProps {
 
 export const App = (props: IProps) => {
     const location = useLocation()
+    const onMobile = useOnMobile()
     const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
     const theme = darkModeEnabled ? DarkTheme : LightTheme
     const [drawerOpen, setDrawerOpen] = useState(false)
@@ -21,19 +23,23 @@ export const App = (props: IProps) => {
     return (
         <ThemeProvider theme={theme}>
             <Column
+                overflowX={"hidden"}
                 backgroundColor={theme.primaryColor}
                 position={"relative"}
-                width={"100%"}
-                height={"100vh"}>
-                <NavigationBar />
+                width={"100%"}>
+                { onMobile &&
+                    <GPAAppBar onMenuClick={() => setDrawerOpen(true)}/>
+                }
                 {props.routes}
-                <Drawer
-                    theme={theme}
-                    location={location}
-                    onDismiss={() => setDrawerOpen(false)}
-                    anchor={"left"}
-                    open={drawerOpen}
-                    ModalProps={{onBackdropClick: () => setDrawerOpen(false)}}/>
+                { onMobile &&
+                    <Drawer
+                        theme={theme}
+                        location={location}
+                        onDismiss={() => setDrawerOpen(false)}
+                        anchor={"right"}
+                        open={drawerOpen}
+                        ModalProps={{onBackdropClick: () => setDrawerOpen(false)}}/>
+                }
             </Column>
         </ThemeProvider>
     )

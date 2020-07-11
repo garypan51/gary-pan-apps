@@ -6,7 +6,7 @@ import {useWindowSize} from "../../../../../hooks/UseWindowSize";
 import {animated, config, useSprings} from "react-spring";
 import {ElementUtils} from "../../../../../utils/ElementUtils";
 import {t} from "../../../../../strings/i18n";
-import {GradientItem} from '../GradientItem';
+import {GradientButton} from '../../../../../components/buttons/GradientButton';
 
 interface IProps {
     theme: Theme
@@ -89,11 +89,11 @@ export const ProjectsContainer = (props: IProps) => {
                 //@ts-ignore
                 style={{...{transform: props.transformXYScale.interpolate(transform)}, ...{cursor: "pointer", width: props.width, height: props.height}}}
                 onClick={() => onProjectClick(index, projectItemRefs.current[index])}>
-                <GradientItem
+                <GradientButton
                     key={index}
                     width={unselected ? projectItemWidth : projectItemWidth}
                     height={"150px"}
-                    name={projects[index].name}
+                    text={projects[index].name}
                     expanded={unselected}
                     gradientColors={projects[index].gradient}
                     textColor={projects[index].textColor}/>

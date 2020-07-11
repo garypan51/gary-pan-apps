@@ -16,14 +16,16 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
     alignItems?: string
     padding?: string
     margin?: string
+    overflowX?: string
 }
 
 const StyledColumn = styled.div`
     box-sizing: border-box;
-    overflow: ${(props: IProps) => props.overflow ?? "hidden"};
-    position: ${(props: IProps) => props.position ?? undefined};
+    overflow: ${(props: IProps) => props.overflow};
+    overflow-x: ${(props: IProps) => props.overflowX};
+    position: ${(props: IProps) => props.position};
     display: flex;
-    flex: ${(props: IProps) => props.flex ?? undefined};
+    flex: ${(props: IProps) => props.flex};
     flex-direction: column;
     justify-content: ${(props: IProps) => props.justifyContent ?? "flex-start"};
     align-items: ${(props: IProps) => props.alignItems ?? "flex-start"};

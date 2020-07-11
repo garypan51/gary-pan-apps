@@ -13,7 +13,7 @@ import {Column} from "../flexbox/Column";
 import {Paragraph} from "../text/Paragraph";
 import {GPAPages} from "../../routes";
 import {DrawerItem} from "../presentational/DrawerItem";
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import * as H from "history";
 
 interface IProps extends DrawerProps {
@@ -26,20 +26,13 @@ interface IProps extends DrawerProps {
 }
 
 const StyledMaterialDrawer = styled(MaterialDrawer)`
-    &.drawer {
-        background-color: ${Colors.clearColor};
-        width: 250px;
-    };
-    &.paper {
-        color: ${Colors.clearColor};
-    };
 `
 
 const StyledIconButton = styled(IconButton)`
     &.iconButton {
      :hover {
           background-color: ${props => props.theme.rippleColor};
-        }
+     }
     }
 `
 
@@ -58,7 +51,7 @@ const StyledDrawerItem = styled(DrawerItem)`
 
 export const Drawer = ({theme, location, backgroundColor, width, height, onDismiss, ...rest }: IProps) => {
     const dispatch = useDispatch()
-    const history = useHistory()
+    const navigate = useNavigate()
     const darkModeEnabled = useSelector((state: StoreState) => state.app.darkModeEnabled)
     const lightIcon = darkModeEnabled ? <LightsOffIcon style={{fill: Colors.dark.textColor}}/> : <LightsOnIcon style={{fill: Colors.light.textColor}}/>
 
@@ -67,14 +60,14 @@ export const Drawer = ({theme, location, backgroundColor, width, height, onDismi
     }
 
     const onDrawerItemClick = (path: string) => {
-        history.push(path)
+        navigate(path)
         onDismiss?.()
     }
 
     return (
         <StyledMaterialDrawer classes={{root: "drawer", paper: "paper"}} {...rest}>
-            <Column backgroundColor={theme.primaryColorDark} height={"100%"}>
-                <DrawerHeaderContainer width={"250px"} justifyContent={"space-between"} alignItems={"center"} padding={"0 16px"}>
+            <Column backgroundColor={theme.primaryColorDark} height={"100%"} width={"50vw"} padding={"0 4px"}>
+                <DrawerHeaderContainer width={"50vw"} justifyContent={"space-between"} alignItems={"center"} padding={"0 16px"}>
                     <Paragraph>Quick Links</Paragraph>
                     <Tooltip title="Lights">
                         <StyledIconButton
